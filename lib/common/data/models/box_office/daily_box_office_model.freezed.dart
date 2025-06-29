@@ -14,6 +14,157 @@ part of 'daily_box_office_model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
+mixin _$BoxOfficeResponseModel {
+
+ DailyBoxOfficeModel get boxOfficeResult;
+/// Create a copy of BoxOfficeResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BoxOfficeResponseModelCopyWith<BoxOfficeResponseModel> get copyWith => _$BoxOfficeResponseModelCopyWithImpl<BoxOfficeResponseModel>(this as BoxOfficeResponseModel, _$identity);
+
+  /// Serializes this BoxOfficeResponseModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BoxOfficeResponseModel&&(identical(other.boxOfficeResult, boxOfficeResult) || other.boxOfficeResult == boxOfficeResult));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,boxOfficeResult);
+
+@override
+String toString() {
+  return 'BoxOfficeResponseModel(boxOfficeResult: $boxOfficeResult)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $BoxOfficeResponseModelCopyWith<$Res>  {
+  factory $BoxOfficeResponseModelCopyWith(BoxOfficeResponseModel value, $Res Function(BoxOfficeResponseModel) _then) = _$BoxOfficeResponseModelCopyWithImpl;
+@useResult
+$Res call({
+ DailyBoxOfficeModel boxOfficeResult
+});
+
+
+$DailyBoxOfficeModelCopyWith<$Res> get boxOfficeResult;
+
+}
+/// @nodoc
+class _$BoxOfficeResponseModelCopyWithImpl<$Res>
+    implements $BoxOfficeResponseModelCopyWith<$Res> {
+  _$BoxOfficeResponseModelCopyWithImpl(this._self, this._then);
+
+  final BoxOfficeResponseModel _self;
+  final $Res Function(BoxOfficeResponseModel) _then;
+
+/// Create a copy of BoxOfficeResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? boxOfficeResult = null,}) {
+  return _then(_self.copyWith(
+boxOfficeResult: null == boxOfficeResult ? _self.boxOfficeResult : boxOfficeResult // ignore: cast_nullable_to_non_nullable
+as DailyBoxOfficeModel,
+  ));
+}
+/// Create a copy of BoxOfficeResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DailyBoxOfficeModelCopyWith<$Res> get boxOfficeResult {
+  
+  return $DailyBoxOfficeModelCopyWith<$Res>(_self.boxOfficeResult, (value) {
+    return _then(_self.copyWith(boxOfficeResult: value));
+  });
+}
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _BoxOfficeResponseModel implements BoxOfficeResponseModel {
+  const _BoxOfficeResponseModel({required this.boxOfficeResult});
+  factory _BoxOfficeResponseModel.fromJson(Map<String, dynamic> json) => _$BoxOfficeResponseModelFromJson(json);
+
+@override final  DailyBoxOfficeModel boxOfficeResult;
+
+/// Create a copy of BoxOfficeResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BoxOfficeResponseModelCopyWith<_BoxOfficeResponseModel> get copyWith => __$BoxOfficeResponseModelCopyWithImpl<_BoxOfficeResponseModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$BoxOfficeResponseModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BoxOfficeResponseModel&&(identical(other.boxOfficeResult, boxOfficeResult) || other.boxOfficeResult == boxOfficeResult));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,boxOfficeResult);
+
+@override
+String toString() {
+  return 'BoxOfficeResponseModel(boxOfficeResult: $boxOfficeResult)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BoxOfficeResponseModelCopyWith<$Res> implements $BoxOfficeResponseModelCopyWith<$Res> {
+  factory _$BoxOfficeResponseModelCopyWith(_BoxOfficeResponseModel value, $Res Function(_BoxOfficeResponseModel) _then) = __$BoxOfficeResponseModelCopyWithImpl;
+@override @useResult
+$Res call({
+ DailyBoxOfficeModel boxOfficeResult
+});
+
+
+@override $DailyBoxOfficeModelCopyWith<$Res> get boxOfficeResult;
+
+}
+/// @nodoc
+class __$BoxOfficeResponseModelCopyWithImpl<$Res>
+    implements _$BoxOfficeResponseModelCopyWith<$Res> {
+  __$BoxOfficeResponseModelCopyWithImpl(this._self, this._then);
+
+  final _BoxOfficeResponseModel _self;
+  final $Res Function(_BoxOfficeResponseModel) _then;
+
+/// Create a copy of BoxOfficeResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? boxOfficeResult = null,}) {
+  return _then(_BoxOfficeResponseModel(
+boxOfficeResult: null == boxOfficeResult ? _self.boxOfficeResult : boxOfficeResult // ignore: cast_nullable_to_non_nullable
+as DailyBoxOfficeModel,
+  ));
+}
+
+/// Create a copy of BoxOfficeResponseModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DailyBoxOfficeModelCopyWith<$Res> get boxOfficeResult {
+  
+  return $DailyBoxOfficeModelCopyWith<$Res>(_self.boxOfficeResult, (value) {
+    return _then(_self.copyWith(boxOfficeResult: value));
+  });
+}
+}
+
+
+/// @nodoc
 mixin _$DailyBoxOfficeModel {
 
 /// 박스오피스 종류를 출력합니다.

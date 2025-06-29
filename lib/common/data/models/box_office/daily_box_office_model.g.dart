@@ -6,6 +6,18 @@ part of 'daily_box_office_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_BoxOfficeResponseModel _$BoxOfficeResponseModelFromJson(
+  Map<String, dynamic> json,
+) => _BoxOfficeResponseModel(
+  boxOfficeResult: DailyBoxOfficeModel.fromJson(
+    json['boxOfficeResult'] as Map<String, dynamic>,
+  ),
+);
+
+Map<String, dynamic> _$BoxOfficeResponseModelToJson(
+  _BoxOfficeResponseModel instance,
+) => <String, dynamic>{'boxOfficeResult': instance.boxOfficeResult};
+
 _DailyBoxOfficeModel _$DailyBoxOfficeModelFromJson(
   Map<String, dynamic> json,
 ) => _DailyBoxOfficeModel(

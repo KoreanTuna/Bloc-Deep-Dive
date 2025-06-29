@@ -41,10 +41,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
     gh.lazySingleton<_i1023.BoxOfficeDataSource>(
-      () => boxOfficeDataSourceModule.provideBoxOfficeDataSource(
-        gh<_i361.Dio>(),
-        gh<String>(),
-      ),
+      () =>
+          boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
     );
     gh.factory<_i583.CustomTransitionPage<dynamic>>(
       () => goRouterModule.commonTransition(

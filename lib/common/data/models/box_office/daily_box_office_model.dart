@@ -3,6 +3,16 @@ part 'daily_box_office_model.g.dart';
 part 'daily_box_office_model.freezed.dart';
 
 @freezed
+abstract class BoxOfficeResponseModel with _$BoxOfficeResponseModel {
+  const factory BoxOfficeResponseModel({
+    required DailyBoxOfficeModel boxOfficeResult,
+  }) = _BoxOfficeResponseModel;
+
+  factory BoxOfficeResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$BoxOfficeResponseModelFromJson(json);
+}
+
+@freezed
 abstract class DailyBoxOfficeModel with _$DailyBoxOfficeModel {
   const factory DailyBoxOfficeModel({
     /// 박스오피스 종류를 출력합니다.

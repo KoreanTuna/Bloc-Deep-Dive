@@ -15,7 +15,7 @@ class BoxOfficeRepository {
     String? itemPerPage,
   }) async {
     try {
-      final DailyBoxOfficeModel response = await _boxOfficeDataSource
+      final BoxOfficeResponseModel response = await _boxOfficeDataSource
           .getDailyBoxOffice(
             DailyBoxOfficeRequestModel(
               key: ApiConfig.apiKey,
@@ -24,7 +24,7 @@ class BoxOfficeRepository {
             ),
           );
 
-      return Result.ok(response);
+      return Result.ok(response.boxOfficeResult);
     } catch (e) {
       return Result.error(
         Exception('Failed to fetch daily box office data: $e'),

@@ -18,7 +18,7 @@ class _BoxOfficeDataSource implements BoxOfficeDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<DailyBoxOfficeModel> getDailyBoxOffice(
+  Future<BoxOfficeResponseModel> getDailyBoxOffice(
     DailyBoxOfficeRequestModel dailyBoxOfficeRequestModel,
   ) async {
     final _extra = <String, dynamic>{};
@@ -26,7 +26,7 @@ class _BoxOfficeDataSource implements BoxOfficeDataSource {
     queryParameters.addAll(dailyBoxOfficeRequestModel.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<DailyBoxOfficeModel>(
+    final _options = _setStreamType<BoxOfficeResponseModel>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -37,9 +37,9 @@ class _BoxOfficeDataSource implements BoxOfficeDataSource {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late DailyBoxOfficeModel _value;
+    late BoxOfficeResponseModel _value;
     try {
-      _value = DailyBoxOfficeModel.fromJson(_result.data!);
+      _value = BoxOfficeResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
