@@ -31,17 +31,20 @@ abstract class GoRouterModule {
     initialLocation: '/${RouterPath.splash}',
     refreshListenable: locator<AuthenticationNotifier>(),
     redirect: (context, state) {
-      final authenticationNotifier = locator<AuthenticationNotifier>();
+      final AuthenticationNotifier authNotifier =
+          locator<AuthenticationNotifier>();
+      final AuthenticationStatus status = authNotifier.status;
 
-      final isAuthenticated =
-          authenticationNotifier.status == AuthenticationStatus.authenticated;
-      final isSplash = state.matchedLocation.contains(RouterPath.splash);
-      final isLogin = state.matchedLocation.contains(RouterPath.login);
+      final bool isAuthenticated = status == AuthenticationStatus.authenticated;
+      final bool isSplash = state.matchedLocation.contains(RouterPath.splash);
+      final bool isLogin = state.matchedLocation.contains(RouterPath.login);
 
+      // 인증 안 됐고 splash나 login이 아닌 곳이면 splash로 보낸다
       if (!isAuthenticated && !isSplash && !isLogin) {
-        logger.w('Redirecting to splash screen');
-        return '/${RouterPath.splash}';
+        logger.w('Unauthenticated → Redirect to Splash');
+        return '/${RouterPath.login}';
       }
+
       return null;
     },
     routes: [
