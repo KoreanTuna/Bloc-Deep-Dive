@@ -9,9 +9,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:bloc_deep_dive/common/data/data_source/box_office_data_source.dart'
+    as _i1023;
+import 'package:bloc_deep_dive/common/data/repository/box_office_repository.dart'
+    as _i544;
 import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart'
     as _i32;
-import 'package:bloc_deep_dive/environment/api_config.dart' as _i116;
 import 'package:bloc_deep_dive/router/router.dart' as _i589;
 import 'package:bloc_deep_dive/router/router_observer.dart' as _i229;
 import 'package:bloc_deep_dive/util/dio.dart' as _i875;
@@ -30,13 +33,19 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final goRouterModule = _$GoRouterModule();
     final dioModule = _$DioModule();
+    final boxOfficeDataSourceModule = _$BoxOfficeDataSourceModule();
     gh.singleton<_i32.AuthenticationNotifier>(
       () => _i32.AuthenticationNotifier(),
     );
     gh.factory<_i229.RouterObserver>(() => _i229.RouterObserver());
     gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
-    gh.lazySingleton<_i116.ApiConfig>(() => _i116.ApiConfig());
+    gh.lazySingleton<_i1023.BoxOfficeDataSource>(
+      () => boxOfficeDataSourceModule.provideBoxOfficeDataSource(
+        gh<_i361.Dio>(),
+        gh<String>(),
+      ),
+    );
     gh.factory<_i583.CustomTransitionPage<dynamic>>(
       () => goRouterModule.commonTransition(
         context: gh<_i718.BuildContext>(),
@@ -45,6 +54,9 @@ extension GetItInjectableX on _i174.GetIt {
         durationMilliseconds: gh<int>(),
       ),
     );
+    gh.singleton<_i544.BoxOfficeRepository>(
+      () => _i544.BoxOfficeRepository(gh<_i1023.BoxOfficeDataSource>()),
+    );
     return this;
   }
 }
@@ -52,3 +64,5 @@ extension GetItInjectableX on _i174.GetIt {
 class _$GoRouterModule extends _i589.GoRouterModule {}
 
 class _$DioModule extends _i875.DioModule {}
+
+class _$BoxOfficeDataSourceModule extends _i1023.BoxOfficeDataSourceModule {}

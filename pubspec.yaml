@@ -27,6 +27,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.4.2
   retrofit_generator: ^9.2.0
+  stream_transform: ^2.1.1
   uuid: ^4.5.1
 
 dev_dependencies:
