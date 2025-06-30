@@ -13,17 +13,20 @@ import 'package:injectable/injectable.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+Widget _fadeTransition(
+  BuildContext context,
+  Animation<double> animation,
+  Animation<double> secondaryAnimation,
+  Widget child,
+) {
+  return FadeTransition(
+    opacity: animation,
+    child: child,
+  );
+}
+
 @module
 abstract class GoRouterModule {
-  CustomTransitionPage commonTransition({
-    required BuildContext context,
-    required GoRouterState state,
-    required Widget child,
-    int durationMilliseconds = 0,
-  }) {
-    return NoTransitionPage(key: state.pageKey, name: state.name, child: child);
-  }
-
   @singleton
   GoRouter get router => GoRouter(
     navigatorKey: navigatorKey,
@@ -56,16 +59,37 @@ abstract class GoRouterModule {
             path: RouterPath.splash,
             name: RouterPath.splash,
             builder: (context, state) => const SplashScreen(),
+            pageBuilder:
+                (context, state) => CustomTransitionPage(
+                  key: state.pageKey,
+                  child: const SplashScreen(),
+                  transitionDuration: const Duration(milliseconds: 300),
+                  transitionsBuilder: _fadeTransition,
+                ),
           ),
           GoRoute(
             path: RouterPath.login,
             name: RouterPath.login,
             builder: (context, state) => const LoginScreen(),
+            pageBuilder:
+                (context, state) => CustomTransitionPage(
+                  key: state.pageKey,
+                  child: const LoginScreen(),
+                  transitionDuration: const Duration(milliseconds: 300),
+                  transitionsBuilder: _fadeTransition,
+                ),
           ),
           GoRoute(
             path: RouterPath.home,
             name: RouterPath.home,
             builder: (context, state) => const HomeScreen(),
+            pageBuilder:
+                (context, state) => CustomTransitionPage(
+                  key: state.pageKey,
+                  child: const HomeScreen(),
+                  transitionDuration: const Duration(milliseconds: 300),
+                  transitionsBuilder: _fadeTransition,
+                ),
           ),
         ],
       ),

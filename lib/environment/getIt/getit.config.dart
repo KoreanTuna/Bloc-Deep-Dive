@@ -19,7 +19,6 @@ import 'package:bloc_deep_dive/router/router.dart' as _i589;
 import 'package:bloc_deep_dive/router/router_observer.dart' as _i229;
 import 'package:bloc_deep_dive/util/dio.dart' as _i875;
 import 'package:dio/dio.dart' as _i361;
-import 'package:flutter/widgets.dart' as _i718;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:go_router/go_router.dart' as _i583;
 import 'package:injectable/injectable.dart' as _i526;
@@ -31,26 +30,18 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    final goRouterModule = _$GoRouterModule();
     final dioModule = _$DioModule();
+    final goRouterModule = _$GoRouterModule();
     final boxOfficeDataSourceModule = _$BoxOfficeDataSourceModule();
     gh.singleton<_i32.AuthenticationNotifier>(
       () => _i32.AuthenticationNotifier(),
     );
     gh.factory<_i229.RouterObserver>(() => _i229.RouterObserver());
-    gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
+    gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
     gh.lazySingleton<_i1023.BoxOfficeDataSource>(
       () =>
           boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
-    );
-    gh.factory<_i583.CustomTransitionPage<dynamic>>(
-      () => goRouterModule.commonTransition(
-        context: gh<_i718.BuildContext>(),
-        state: gh<_i583.GoRouterState>(),
-        child: gh<_i718.Widget>(),
-        durationMilliseconds: gh<int>(),
-      ),
     );
     gh.singleton<_i544.BoxOfficeRepository>(
       () => _i544.BoxOfficeRepository(gh<_i1023.BoxOfficeDataSource>()),
@@ -59,8 +50,8 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$GoRouterModule extends _i589.GoRouterModule {}
-
 class _$DioModule extends _i875.DioModule {}
+
+class _$GoRouterModule extends _i589.GoRouterModule {}
 
 class _$BoxOfficeDataSourceModule extends _i1023.BoxOfficeDataSourceModule {}

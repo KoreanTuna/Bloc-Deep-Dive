@@ -1,6 +1,9 @@
 import 'package:bloc_deep_dive/common/bloc/authentication/authentication_bloc.dart';
+import 'package:bloc_deep_dive/common/constant/png_image_path.dart';
 import 'package:bloc_deep_dive/common/data/repository/authentication_repository.dart';
+import 'package:bloc_deep_dive/common/extension/context_extension.dart';
 import 'package:bloc_deep_dive/presentation/widget/base/base_screen.dart';
+import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
 import 'package:bloc_deep_dive/router/router_path.dart';
 import 'package:bloc_deep_dive/util/logger.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,8 +28,13 @@ class SplashScreen extends BaseScreen {
             break;
         }
       },
-      child: const Center(
-        child: CupertinoActivityIndicator(color: Colors.indigo),
+      child: SizedBox(
+        width: context.screenSize.width,
+        height: context.screenSize.height,
+        child: PngImageWidget(
+          imagePath: PngImagePath.splashLogo,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
