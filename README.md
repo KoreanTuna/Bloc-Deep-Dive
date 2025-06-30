@@ -7,6 +7,31 @@
 # OnBoard 화면
 <img width="330" alt="onboard" src="https://github.com/user-attachments/assets/8f79abc7-1e6e-409b-b1de-eebd7514be8e" />
 
+OnBoardEvent : Select / DeSelect / Submit 3가지 이벤트 클래스 사용
+OnBoardState : FavoriteGenre Enum 리스트를 상태로 갖는다.
+
+''' dart
+return BlocSelector<OnBoardBloc, OnBoardState, bool>(
+    selector: (state) => state.selectedGenres.contains(genre),
+    builder: (context, isSelected) {
+      return GenreCard(
+        onTap: (_) {
+          if (isSelected) {
+            context.read<OnBoardBloc>().add(
+              DeselectGenreEvent(genre),
+            );
+          } else {
+            context.read<OnBoardBloc>().add(
+              SelectGenreEvent(genre),
+            );
+          }
+        },
+        genre: genre,
+        isSelected: isSelected,
+      );
+    },
+  );
+'''
 
 
 # DailyBoxOffice 화면
