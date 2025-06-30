@@ -1,8 +1,8 @@
-import 'package:bloc_deep_dive/common/data/repository/box_office_repository.dart';
+import 'package:bloc_deep_dive/presentation/daily_box_office/data/repository/box_office_repository.dart';
 import 'package:bloc_deep_dive/common/extension/date_time_extension.dart';
 import 'package:bloc_deep_dive/environment/getIt/getit.dart';
-import 'package:bloc_deep_dive/presentation/daily_box_office/bloc/daily_box_office_bloc.dart';
-import 'package:bloc_deep_dive/presentation/daily_box_office/widget/daily_rank_widget.dart';
+import 'package:bloc_deep_dive/presentation/daily_box_office/presentation/bloc/daily_box_office_bloc.dart';
+import 'package:bloc_deep_dive/presentation/daily_box_office/presentation/widget/daily_rank_widget.dart';
 import 'package:bloc_deep_dive/presentation/home/widget/home_title.dart';
 import 'package:bloc_deep_dive/presentation/widget/base/base_screen.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';

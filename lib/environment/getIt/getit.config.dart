@@ -9,12 +9,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bloc_deep_dive/common/data/data_source/box_office_data_source.dart'
-    as _i1023;
-import 'package:bloc_deep_dive/common/data/repository/box_office_repository.dart'
-    as _i544;
 import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart'
     as _i32;
+import 'package:bloc_deep_dive/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
+    as _i19;
+import 'package:bloc_deep_dive/presentation/daily_box_office/data/repository/box_office_repository.dart'
+    as _i889;
 import 'package:bloc_deep_dive/router/router.dart' as _i589;
 import 'package:bloc_deep_dive/router/router_observer.dart' as _i229;
 import 'package:bloc_deep_dive/util/dio.dart' as _i875;
@@ -39,12 +39,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i229.RouterObserver>(() => _i229.RouterObserver());
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
     gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
-    gh.lazySingleton<_i1023.BoxOfficeDataSource>(
+    gh.lazySingleton<_i19.BoxOfficeDataSource>(
       () =>
           boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
     );
-    gh.singleton<_i544.BoxOfficeRepository>(
-      () => _i544.BoxOfficeRepository(gh<_i1023.BoxOfficeDataSource>()),
+    gh.singleton<_i889.BoxOfficeRepository>(
+      () => _i889.BoxOfficeRepository(gh<_i19.BoxOfficeDataSource>()),
     );
     return this;
   }
@@ -54,4 +54,4 @@ class _$DioModule extends _i875.DioModule {}
 
 class _$GoRouterModule extends _i589.GoRouterModule {}
 
-class _$BoxOfficeDataSourceModule extends _i1023.BoxOfficeDataSourceModule {}
+class _$BoxOfficeDataSourceModule extends _i19.BoxOfficeDataSourceModule {}

@@ -1,5 +1,5 @@
 import 'package:bloc_deep_dive/common/constant/svg_image_path.dart';
-import 'package:bloc_deep_dive/common/data/models/box_office/daily_box_office_model.dart';
+import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_box_office_model.dart';
 import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';
 import 'package:bloc_deep_dive/theme/text_style.dart';
