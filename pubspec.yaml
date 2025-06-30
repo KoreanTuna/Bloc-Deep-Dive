@@ -15,6 +15,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_dotenv: ^5.2.1
   flutter_hooks: ^0.21.2
+  flutter_scroll_shadow: ^1.2.6
   flutter_svg: ^2.2.0
   formz: ^0.8.0
   freezed: ^3.0.6

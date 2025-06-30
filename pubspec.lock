@@ -270,6 +270,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_scroll_shadow:
+    dependency: "direct main"
+    description:
+      name: flutter_scroll_shadow
+      sha256: "9ec6a566831a7251b4ffbee0a3691fbe02d3dd16a9d26c96838c02958f27d456"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.6"
   flutter_svg:
     dependency: "direct main"
     description:

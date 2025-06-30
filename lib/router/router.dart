@@ -3,6 +3,7 @@ import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart';
 import 'package:bloc_deep_dive/environment/getIt/getit.dart';
 import 'package:bloc_deep_dive/presentation/home/home_screen.dart';
 import 'package:bloc_deep_dive/presentation/login/login_screen.dart';
+import 'package:bloc_deep_dive/presentation/on_board/presentation/on_board_screen.dart';
 import 'package:bloc_deep_dive/presentation/splash/splash_screen.dart';
 import 'package:bloc_deep_dive/router/router_observer.dart';
 import 'package:bloc_deep_dive/router/router_path.dart';
@@ -22,6 +23,17 @@ Widget _fadeTransition(
   return FadeTransition(
     opacity: animation,
     child: child,
+  );
+}
+
+CustomTransitionPage buildFadeTransitionPage({
+  required GoRouterState state,
+  required Widget child,
+}) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: _fadeTransition,
   );
 }
 
@@ -60,11 +72,9 @@ abstract class GoRouterModule {
             name: RouterPath.splash,
             builder: (context, state) => const SplashScreen(),
             pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  key: state.pageKey,
+                (context, state) => buildFadeTransitionPage(
+                  state: state,
                   child: const SplashScreen(),
-                  transitionDuration: const Duration(milliseconds: 300),
-                  transitionsBuilder: _fadeTransition,
                 ),
           ),
           GoRoute(
@@ -72,11 +82,9 @@ abstract class GoRouterModule {
             name: RouterPath.login,
             builder: (context, state) => const LoginScreen(),
             pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  key: state.pageKey,
+                (context, state) => buildFadeTransitionPage(
+                  state: state,
                   child: const LoginScreen(),
-                  transitionDuration: const Duration(milliseconds: 300),
-                  transitionsBuilder: _fadeTransition,
                 ),
           ),
           GoRoute(
@@ -84,11 +92,19 @@ abstract class GoRouterModule {
             name: RouterPath.home,
             builder: (context, state) => const HomeScreen(),
             pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  key: state.pageKey,
+                (context, state) => buildFadeTransitionPage(
+                  state: state,
                   child: const HomeScreen(),
-                  transitionDuration: const Duration(milliseconds: 300),
-                  transitionsBuilder: _fadeTransition,
+                ),
+          ),
+          GoRoute(
+            path: RouterPath.onboard,
+            name: RouterPath.onboard,
+            builder: (context, state) => const OnBoardScreen(),
+            pageBuilder:
+                (context, state) => buildFadeTransitionPage(
+                  state: state,
+                  child: const OnBoardScreen(),
                 ),
           ),
         ],

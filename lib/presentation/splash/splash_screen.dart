@@ -20,7 +20,7 @@ class SplashScreen extends BaseScreen {
         logger.d('SplashScreen: AuthenticationState changed: $state');
         switch (state.status) {
           case AuthenticationStatus.authenticated:
-            context.goNamed(RouterPath.home);
+            context.goNamed(RouterPath.onboard);
             break;
           case AuthenticationStatus.unauthenticated:
           case AuthenticationStatus.unknown:
