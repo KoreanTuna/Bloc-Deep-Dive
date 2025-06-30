@@ -59,3 +59,37 @@ Bloc리스너를 통해 이벤트 처리 진행
 # DailyBoxOffice 화면
 
 <img width="330px" alt="home" src="https://github.com/user-attachments/assets/7d44d403-ba39-4461-b008-933f6f654128" />
+
+<br><br>
+
+데이터를 Fetching해오는 Bloc함수
+의존성주입받은 Repo를 통해 Result타입으로 결과 리턴 후 성공/실패에 따라 emit진행
+성공의 경우 영화의 rank를 기준으로 정렬 후 emit을 진행한다.
+``` dart
+Future<void> _onFetched(
+    DailyBoxOfficeFetched event,
+    Emitter<DailyBoxOfficeState> emit,
+  ) async {
+    final Result<DailyBoxOfficeModel> result = await _boxOfficeRepository
+        .getDailyBoxOffice(targetDt: event.targetDt, itemPerPage: '10');
+
+    result.when(
+      ok: (DailyBoxOfficeModel data) {
+        final List<DailyBoxOfficeMovieModel> boxOffices = List.from(
+          data.dailyBoxOfficeList,
+        )..sort((a, b) => a.rank!.compareTo(b.rank!));
+
+        emit(
+          state.copyWith(
+            status: DailyBoxOfficeStatus.success,
+            boxOffices: boxOffices,
+          ),
+        );
+      },
+      error: (Exception e) {
+        emit(state.copyWith(status: DailyBoxOfficeStatus.failure));
+      },
+    );
+  }
+```
+
