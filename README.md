@@ -5,8 +5,7 @@
 
 
 # OnBoard 화면
-
-![on_board_screen](https://github.com/user-attachments/assets/5dc4ed2e-9103-4a40-954c-13acf49c9826)
+<img src="https://github.com/user-attachments/assets/5dc4ed2e-9103-4a40-954c-13acf49c9826" width="300px">
 
 
 # DailyBoxOffice 화면
