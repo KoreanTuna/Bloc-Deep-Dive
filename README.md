@@ -9,4 +9,5 @@
 
 
 # DailyBoxOffice 화면
-![home](https://github.com/user-attachments/assets/8746dee1-88f3-443c-8298-2414ad999e34)
+
+<img width="300px" alt="home" src="https://github.com/user-attachments/assets/7d44d403-ba39-4461-b008-933f6f654128" />
