@@ -10,7 +10,7 @@
 OnBoardEvent : Select / DeSelect / Submit 3가지 이벤트 클래스 사용
 OnBoardState : FavoriteGenre Enum 리스트를 상태로 갖는다.
 
-''' dart
+``` dart
 return BlocSelector<OnBoardBloc, OnBoardState, bool>(
     selector: (state) => state.selectedGenres.contains(genre),
     builder: (context, isSelected) {
@@ -31,7 +31,8 @@ return BlocSelector<OnBoardBloc, OnBoardState, bool>(
       );
     },
   );
-'''
+```
+
 
 
 # DailyBoxOffice 화면
