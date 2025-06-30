@@ -21,18 +21,12 @@ class OnBoardScreen extends BaseScreen {
       create: (_) => OnBoardBloc(),
       child: BlocListener<OnBoardBloc, OnBoardState>(
         listenWhen: (previous, current) {
-          logger.d(
-            'OnBoardBloc 상태 변경: 이전 상태: $previous, 현재 상태: $current',
-          );
           return previous.isSubmitted != current.isSubmitted;
         },
 
         /// OnBoardBloc의 isSubmitted 상태가 변경되었을 때만 실행
         listener: (context, state) {
           if (state.isSubmitted) {
-            logger.d(
-              '선택된 장르: ${context.read<OnBoardBloc>().state.selectedGenres}',
-            );
             context.goNamed(RouterPath.home);
           }
         },
