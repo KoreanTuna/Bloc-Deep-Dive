@@ -1,4 +1,3 @@
-import 'package:bloc_deep_dive/common/constant/png_image_path.dart';
 import 'package:bloc_deep_dive/common/data/repository/box_office_repository.dart';
 import 'package:bloc_deep_dive/common/extension/date_time_extension.dart';
 import 'package:bloc_deep_dive/environment/getIt/getit.dart';
@@ -6,9 +5,7 @@ import 'package:bloc_deep_dive/presentation/daily_box_office/bloc/daily_box_offi
 import 'package:bloc_deep_dive/presentation/daily_box_office/widget/daily_rank_widget.dart';
 import 'package:bloc_deep_dive/presentation/home/widget/home_title.dart';
 import 'package:bloc_deep_dive/presentation/widget/base/base_screen.dart';
-import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';
-import 'package:bloc_deep_dive/theme/text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,9 +45,7 @@ class HomeScreen extends BaseScreen {
                     thickness: 0.5,
                     height: 32,
                   ),
-                  DailyRankWidget(
-                    dailyBoxOfficeMovieList: state.boxOffices,
-                  ),
+                  DailyRankWidget(dailyBoxOfficeMovieList: state.boxOffices),
                 ],
               ),
             );
