@@ -6,7 +6,7 @@
 
 # OnBoard 화면
 <img width="330" alt="onboard" src="https://github.com/user-attachments/assets/bcb87d64-965d-4773-a4a3-f443958a1283" />
-
+</br>
 
 OnBoardEvent : Select / DeSelect / Submit 3가지 이벤트 클래스 사용 </br>
 OnBoardState : FavoriteGenre Enum 리스트를 상태로 갖는다.
@@ -38,7 +38,23 @@ return BlocSelector<OnBoardBloc, OnBoardState, bool>(
   );
 ```
 
+</br>
+장르카드가 모두 선택되어, 하단에 선택 완료버튼을 클릭했을때, SubmitEvent가 Bloc에 추가되고,
+Bloc리스너를 통해 이벤트 처리 진행
 
+``` dart
+    child: BlocListener<OnBoardBloc, OnBoardState>(
+    listenWhen: (previous, current) {
+      return previous.isSubmitted != current.isSubmitted;
+    },
+    
+    /// OnBoardBloc의 isSubmitted 상태가 변경되었을 때만 실행
+    listener: (context, state) {
+      if (state.isSubmitted) {
+        context.goNamed(RouterPath.home);
+      }
+    },
+```
 
 # DailyBoxOffice 화면
 
