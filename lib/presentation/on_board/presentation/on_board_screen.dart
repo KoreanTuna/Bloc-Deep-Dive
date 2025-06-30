@@ -61,29 +61,25 @@ class OnBoardScreen extends BaseScreen {
                   itemCount: FavoriteGenre.values.length,
                   itemBuilder: (context, index) {
                     final genre = FavoriteGenre.values[index];
-                    return GenreCard(
-                      onTap: (genre) {
-                        final isSelected = context
-                            .read<OnBoardBloc>()
-                            .state
-                            .selectedGenres
-                            .contains(genre);
-                        if (isSelected) {
-                          context.read<OnBoardBloc>().add(
-                            DeselectGenreEvent(genre),
-                          );
-                        } else {
-                          context.read<OnBoardBloc>().add(
-                            SelectGenreEvent(genre),
-                          );
-                        }
+                    return BlocSelector<OnBoardBloc, OnBoardState, bool>(
+                      selector: (state) => state.selectedGenres.contains(genre),
+                      builder: (context, isSelected) {
+                        return GenreCard(
+                          onTap: (_) {
+                            if (isSelected) {
+                              context.read<OnBoardBloc>().add(
+                                DeselectGenreEvent(genre),
+                              );
+                            } else {
+                              context.read<OnBoardBloc>().add(
+                                SelectGenreEvent(genre),
+                              );
+                            }
+                          },
+                          genre: genre,
+                          isSelected: isSelected,
+                        );
                       },
-                      genre: genre,
-                      isSelected: context
-                          .watch<OnBoardBloc>()
-                          .state
-                          .selectedGenres
-                          .contains(genre),
                     );
                   },
                 ),
