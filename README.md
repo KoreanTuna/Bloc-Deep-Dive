@@ -5,7 +5,8 @@
 
 
 # OnBoard 화면
-<img width="330" alt="onboard" src="https://github.com/user-attachments/assets/8f79abc7-1e6e-409b-b1de-eebd7514be8e" />
+<img width="330" alt="onboard" src="https://github.com/user-attachments/assets/bcb87d64-965d-4773-a4a3-f443958a1283" />
+
 
 OnBoardEvent : Select / DeSelect / Submit 3가지 이벤트 클래스 사용 </br>
 OnBoardState : FavoriteGenre Enum 리스트를 상태로 갖는다.
@@ -13,6 +14,7 @@ OnBoardState : FavoriteGenre Enum 리스트를 상태로 갖는다.
 
 장르카드는 BlocSelector를 통해 현재 선택되어있는지 아닌에 따라 Select, DeSelect Event를 분기처리
 [코드 파일](https://github.com/KoreanTuna/Bloc-Deep-Dive/blob/main/lib/presentation/on_board/presentation/on_board_screen.dart)
+
 ``` dart
 return BlocSelector<OnBoardBloc, OnBoardState, bool>(
     selector: (state) => state.selectedGenres.contains(genre),
