@@ -5,9 +5,10 @@
 
 
 # OnBoard 화면
-<img src="https://github.com/user-attachments/assets/5dc4ed2e-9103-4a40-954c-13acf49c9826" width="300px">
+<img width="330" alt="onboard" src="https://github.com/user-attachments/assets/8f79abc7-1e6e-409b-b1de-eebd7514be8e" />
+
 
 
 # DailyBoxOffice 화면
 
-<img width="300px" alt="home" src="https://github.com/user-attachments/assets/7d44d403-ba39-4461-b008-933f6f654128" />
+<img width="330px" alt="home" src="https://github.com/user-attachments/assets/7d44d403-ba39-4461-b008-933f6f654128" />
