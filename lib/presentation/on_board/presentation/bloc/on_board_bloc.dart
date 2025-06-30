@@ -25,6 +25,6 @@ class OnBoardBloc extends Bloc<OnBoardEvent, OnBoardState> {
   }
 
   void _onSubmitOnBoard(SubmitOnBoardEvent event, Emitter<OnBoardState> emit) {
-    // Handle submission logic here
+    emit(state.copyWith(isSubmitted: true));
   }
 }

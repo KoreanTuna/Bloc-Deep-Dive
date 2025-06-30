@@ -24,10 +24,8 @@ class DeselectGenreEvent extends OnBoardEvent {
 }
 
 class SubmitOnBoardEvent extends OnBoardEvent {
-  final List<FavoriteGenre> selectedGenres;
-
-  SubmitOnBoardEvent(this.selectedGenres);
+  SubmitOnBoardEvent();
 
   @override
-  List<Object?> get props => [selectedGenres];
+  List<Object?> get props => [];
 }
