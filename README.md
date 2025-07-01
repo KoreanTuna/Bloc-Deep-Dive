@@ -94,7 +94,7 @@ Future<void> _onFetched(
 ```
 
 # MovieDetail 화면
-![화면 기록 2025-07-01 오후 6 48 22](https://github.com/user-attachments/assets/da8d9805-b6ce-4f58-a052-58276e1249af)
+![화면 기록 2025-07-01 오후 6 48 22 (1)](https://github.com/user-attachments/assets/62616ffc-5c83-4079-8ab2-f7fcf4df4988)
 <br>
 <br>
 
