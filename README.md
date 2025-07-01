@@ -58,7 +58,6 @@ Bloc리스너를 통해 이벤트 처리 진행
 
 # DailyBoxOffice 화면
 
-<img width="330px" alt="home" src="https://github.com/user-attachments/assets/7d44d403-ba39-4461-b008-933f6f654128" />
 
 <br><br>
 
@@ -94,8 +93,10 @@ Future<void> _onFetched(
 ```
 
 # MovieDetail 화면
-![화면 기록 2025-07-01 오후 6 48 22 (1)](https://github.com/user-attachments/assets/62616ffc-5c83-4079-8ab2-f7fcf4df4988)
+<img width="330px" alt="home" src="https://github.com/user-attachments/assets/2ec9c8ae-edca-4803-8a01-f73503be730a" />
+
 <br>
+
 <br>
 
 영화 상세 정보 API를 활용하여 영화의 개봉일, 제작사, 출연진, 장르와 같은 정보를 불러오는 화면입니다.
