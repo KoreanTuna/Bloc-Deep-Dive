@@ -15,6 +15,10 @@ import 'package:bloc_deep_dive/presentation/daily_box_office/data/data_source/bo
     as _i19;
 import 'package:bloc_deep_dive/presentation/daily_box_office/data/repository/box_office_repository.dart'
     as _i889;
+import 'package:bloc_deep_dive/presentation/movie_detail/data/data_source/movie_detail_data_source.dart'
+    as _i296;
+import 'package:bloc_deep_dive/presentation/movie_detail/data/repository/movie_detail_repository.dart'
+    as _i705;
 import 'package:bloc_deep_dive/router/router.dart' as _i589;
 import 'package:bloc_deep_dive/router/router_observer.dart' as _i229;
 import 'package:bloc_deep_dive/util/dio.dart' as _i875;
@@ -33,6 +37,7 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     final goRouterModule = _$GoRouterModule();
     final boxOfficeDataSourceModule = _$BoxOfficeDataSourceModule();
+    final movieDetailDataSourceModule = _$MovieDetailDataSourceModule();
     gh.singleton<_i32.AuthenticationNotifier>(
       () => _i32.AuthenticationNotifier(),
     );
@@ -42,6 +47,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i19.BoxOfficeDataSource>(
       () =>
           boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i296.MovieDetailDataSource>(
+      () => movieDetailDataSourceModule.provideMovieDetailDataSource(
+        gh<_i361.Dio>(),
+      ),
+    );
+    gh.lazySingleton<_i705.MovieDetailRepository>(
+      () => _i705.MovieDetailRepository(gh<_i296.MovieDetailDataSource>()),
     );
     gh.singleton<_i889.BoxOfficeRepository>(
       () => _i889.BoxOfficeRepository(gh<_i19.BoxOfficeDataSource>()),
@@ -55,3 +68,5 @@ class _$DioModule extends _i875.DioModule {}
 class _$GoRouterModule extends _i589.GoRouterModule {}
 
 class _$BoxOfficeDataSourceModule extends _i19.BoxOfficeDataSourceModule {}
+
+class _$MovieDetailDataSourceModule extends _i296.MovieDetailDataSourceModule {}

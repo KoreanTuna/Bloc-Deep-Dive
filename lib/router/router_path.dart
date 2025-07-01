@@ -7,4 +7,6 @@ abstract class RouterPath {
   static const String login = 'login';
 
   static const String onboard = 'onboard';
+
+  static const String movieDetail = 'movie-detail';
 }

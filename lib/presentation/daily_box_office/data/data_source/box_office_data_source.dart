@@ -17,7 +17,11 @@ abstract class BoxOfficeDataSourceModule {
 
 @RestApi()
 abstract class BoxOfficeDataSource {
-  factory BoxOfficeDataSource(Dio dio, {String baseUrl}) = _BoxOfficeDataSource;
+  factory BoxOfficeDataSource(
+    Dio dio, {
+    String? baseUrl,
+    ParseErrorLogger? errorLogger,
+  }) = _BoxOfficeDataSource;
 
   @GET('boxoffice/searchDailyBoxOfficeList.json?')
   Future<BoxOfficeResponseModel> getDailyBoxOffice(

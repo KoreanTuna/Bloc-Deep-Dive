@@ -39,6 +39,7 @@ class GenreCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _SelectCheckBox(
+              key: Key(genre.korean),
               onTap: () => onTap(genre),
               isSelected: isSelected,
             ),

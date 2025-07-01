@@ -32,7 +32,7 @@ extension EmotionBarnTextStyle on TextStyle {
 
   TextStyle get subTitle1 => copyWith(
     fontSize: 20,
-    fontFamily: jalnanFontFamily,
+    fontFamily: pretendardFontFamily,
     height: 1.2,
     letterSpacing: 0,
     color: ColorStyle.gray850,
@@ -41,7 +41,7 @@ extension EmotionBarnTextStyle on TextStyle {
 
   TextStyle get subTitle2 => copyWith(
     fontSize: 18,
-    fontFamily: jalnanFontFamily,
+    fontFamily: pretendardFontFamily,
     height: 1.2,
     letterSpacing: 0,
     color: ColorStyle.gray850,
@@ -50,7 +50,7 @@ extension EmotionBarnTextStyle on TextStyle {
 
   TextStyle get subTitle3 => copyWith(
     fontSize: 16,
-    fontFamily: jalnanFontFamily,
+    fontFamily: pretendardFontFamily,
     height: 1.2,
     letterSpacing: 0,
     color: ColorStyle.gray850,

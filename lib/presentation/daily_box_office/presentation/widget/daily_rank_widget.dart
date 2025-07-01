@@ -3,6 +3,7 @@ import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_b
 import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';
 import 'package:bloc_deep_dive/theme/text_style.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -24,9 +25,14 @@ enum DailyRankType {
 }
 
 class DailyRankWidget extends HookWidget {
-  const DailyRankWidget({super.key, required this.dailyBoxOfficeMovieList});
+  const DailyRankWidget({
+    super.key,
+    required this.dailyBoxOfficeMovieList,
+    required this.onMovieSelected,
+  });
 
   final List<DailyBoxOfficeMovieModel> dailyBoxOfficeMovieList;
+  final void Function(String movieCd) onMovieSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +45,14 @@ class DailyRankWidget extends HookWidget {
             key: ValueKey(dailyBoxOfficeMovieList[index].movieCd),
             rankType: DailyRankType.values[index],
             dailyBoxOfficeMovie: dailyBoxOfficeMovieList[index],
+            onMovieSelected: onMovieSelected,
           );
         }
         return _UnknownRankWidget(
           isFirst: index == 3 && dailyBoxOfficeMovieList.length > 3,
           key: ValueKey(dailyBoxOfficeMovieList[index].movieCd),
           dailyBoxOfficeMovie: dailyBoxOfficeMovieList[index],
+          onMovieSelected: onMovieSelected,
         );
       }),
     );
@@ -56,74 +64,34 @@ class _RankWidget extends StatelessWidget {
     super.key,
     required this.rankType,
     required this.dailyBoxOfficeMovie,
+    required this.onMovieSelected,
   });
 
   final DailyRankType rankType;
   final DailyBoxOfficeMovieModel dailyBoxOfficeMovie;
+  final void Function(String movieCd) onMovieSelected;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SvgImageWidget(
-          imagePath: rankType.imagePath,
-          fit: BoxFit.cover,
-          width: 48,
-          height: 48,
-        ),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 4,
-          children: [
-            Text(
-              dailyBoxOfficeMovie.movieNm ?? '제목 없음',
-              style: TextStyle().subTitle2,
-            ),
-            _MovieDetailInfo(dailyBoxOfficeMovie: dailyBoxOfficeMovie),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class _UnknownRankWidget extends StatelessWidget {
-  const _UnknownRankWidget({
-    super.key,
-    required this.dailyBoxOfficeMovie,
-    this.isFirst = false,
-  });
-
-  final DailyBoxOfficeMovieModel dailyBoxOfficeMovie;
-  final bool isFirst;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          isFirst
-              ? const EdgeInsets.only(top: 16)
-              : const EdgeInsets.only(top: 0),
+    return InkWell(
+      onTap: () => onMovieSelected(dailyBoxOfficeMovie.movieCd ?? ''),
       child: Row(
-        spacing: 12,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: ColorStyle.primary100,
-            ),
+          SvgImageWidget(
+            imagePath: rankType.imagePath,
+            fit: BoxFit.cover,
+            width: 48,
+            height: 48,
           ),
+          const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 4,
             children: [
               Text(
                 dailyBoxOfficeMovie.movieNm ?? '제목 없음',
-                style: TextStyle().subTitle3,
+                style: TextStyle().subTitle2,
               ),
               _MovieDetailInfo(dailyBoxOfficeMovie: dailyBoxOfficeMovie),
             ],
@@ -134,8 +102,58 @@ class _UnknownRankWidget extends StatelessWidget {
   }
 }
 
+class _UnknownRankWidget extends StatelessWidget {
+  const _UnknownRankWidget({
+    super.key,
+    required this.dailyBoxOfficeMovie,
+    this.isFirst = false,
+    required this.onMovieSelected,
+  });
+
+  final DailyBoxOfficeMovieModel dailyBoxOfficeMovie;
+  final void Function(String movieCd) onMovieSelected;
+  final bool isFirst;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => onMovieSelected(dailyBoxOfficeMovie.movieCd ?? ''),
+      child: Padding(
+        padding:
+            isFirst
+                ? const EdgeInsets.only(top: 16)
+                : const EdgeInsets.only(top: 0),
+        child: Row(
+          spacing: 12,
+          children: [
+            Container(
+              width: 8,
+              height: 8,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: ColorStyle.primary100,
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 4,
+              children: [
+                Text(
+                  dailyBoxOfficeMovie.movieNm ?? '제목 없음',
+                  style: TextStyle().subTitle3,
+                ),
+                _MovieDetailInfo(dailyBoxOfficeMovie: dailyBoxOfficeMovie),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _MovieDetailInfo extends StatelessWidget {
-  const _MovieDetailInfo({super.key, required this.dailyBoxOfficeMovie});
+  const _MovieDetailInfo({required this.dailyBoxOfficeMovie});
 
   final DailyBoxOfficeMovieModel dailyBoxOfficeMovie;
 

@@ -6,7 +6,6 @@ import 'package:bloc_deep_dive/presentation/widget/base/base_screen.dart';
 import 'package:bloc_deep_dive/router/router_path.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';
 import 'package:bloc_deep_dive/theme/text_style.dart';
-import 'package:bloc_deep_dive/util/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';

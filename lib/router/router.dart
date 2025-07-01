@@ -3,6 +3,7 @@ import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart';
 import 'package:bloc_deep_dive/environment/getIt/getit.dart';
 import 'package:bloc_deep_dive/presentation/home/home_screen.dart';
 import 'package:bloc_deep_dive/presentation/login/login_screen.dart';
+import 'package:bloc_deep_dive/presentation/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:bloc_deep_dive/presentation/on_board/presentation/on_board_screen.dart';
 import 'package:bloc_deep_dive/presentation/splash/splash_screen.dart';
 import 'package:bloc_deep_dive/router/router_observer.dart';
@@ -88,6 +89,16 @@ abstract class GoRouterModule {
                 ),
           ),
           GoRoute(
+            path: RouterPath.onboard,
+            name: RouterPath.onboard,
+            builder: (context, state) => const OnBoardScreen(),
+            pageBuilder:
+                (context, state) => buildFadeTransitionPage(
+                  state: state,
+                  child: const OnBoardScreen(),
+                ),
+          ),
+          GoRoute(
             path: RouterPath.home,
             name: RouterPath.home,
             builder: (context, state) => const HomeScreen(),
@@ -98,14 +109,43 @@ abstract class GoRouterModule {
                 ),
           ),
           GoRoute(
-            path: RouterPath.onboard,
-            name: RouterPath.onboard,
-            builder: (context, state) => const OnBoardScreen(),
-            pageBuilder:
-                (context, state) => buildFadeTransitionPage(
+            path: '${RouterPath.movieDetail}/:movieCd/:prevDayTotalAudits',
+            name: RouterPath.movieDetail,
+            builder: (context, state) {
+              final String? movieCd = state.pathParameters['movieCd'];
+              final int prevDayTotalAudits =
+                  state.pathParameters['prevDayTotalAudits'] != null
+                      ? int.parse(state.pathParameters['prevDayTotalAudits']!)
+                      : 0;
+              if (movieCd == null) {
+                return HomeScreen();
+              }
+              return MovieDetailScreen(
+                movieCd: movieCd,
+                prevDayTotalAudits: prevDayTotalAudits,
+              );
+            },
+            pageBuilder: (context, state) {
+              final String? movieCd = state.pathParameters['movieCd'];
+              final int prevDayTotalAudits =
+                  state.pathParameters['prevDayTotalAudits'] != null
+                      ? int.parse(state.pathParameters['prevDayTotalAudits']!)
+                      : 0;
+
+              if (movieCd == null) {
+                return buildFadeTransitionPage(
                   state: state,
-                  child: const OnBoardScreen(),
+                  child: HomeScreen(),
+                );
+              }
+              return buildFadeTransitionPage(
+                state: state,
+                child: MovieDetailScreen(
+                  movieCd: movieCd,
+                  prevDayTotalAudits: prevDayTotalAudits,
                 ),
+              );
+            },
           ),
         ],
       ),

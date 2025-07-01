@@ -5,10 +5,12 @@ import 'package:bloc_deep_dive/presentation/daily_box_office/presentation/bloc/d
 import 'package:bloc_deep_dive/presentation/daily_box_office/presentation/widget/daily_rank_widget.dart';
 import 'package:bloc_deep_dive/presentation/home/widget/home_title.dart';
 import 'package:bloc_deep_dive/presentation/widget/base/base_screen.dart';
+import 'package:bloc_deep_dive/router/router_path.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends BaseScreen {
   const HomeScreen({super.key});
@@ -45,7 +47,23 @@ class HomeScreen extends BaseScreen {
                     thickness: 0.5,
                     height: 32,
                   ),
-                  DailyRankWidget(dailyBoxOfficeMovieList: state.boxOffices),
+                  DailyRankWidget(
+                    dailyBoxOfficeMovieList: state.boxOffices,
+                    onMovieSelected:
+                        (movieCd) => context.pushNamed(
+                          RouterPath.movieDetail,
+                          pathParameters: {
+                            'movieCd': movieCd,
+                            'prevDayTotalAudits':
+                                state.boxOffices
+                                    .firstWhere(
+                                      (movie) => movie.movieCd == movieCd,
+                                    )
+                                    .audiCnt
+                                    .toString(),
+                          },
+                        ),
+                  ),
                 ],
               ),
             );
