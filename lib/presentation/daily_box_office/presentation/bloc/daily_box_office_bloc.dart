@@ -32,7 +32,16 @@ class DailyBoxOfficeBloc
       ok: (DailyBoxOfficeModel data) {
         final List<DailyBoxOfficeMovieModel> boxOffices = List.from(
           data.dailyBoxOfficeList,
-        )..sort((a, b) => a.rank!.compareTo(b.rank!));
+        );
+
+        boxOffices.sort((a, b) {
+          final int? rankA = int.tryParse(a.rank ?? '');
+          final int? rankB = int.tryParse(b.rank ?? '');
+          if (rankA == null && rankB == null) return 0;
+          if (rankA == null) return 1;
+          if (rankB == null) return -1;
+          return rankA - rankB;
+        });
 
         emit(
           state.copyWith(
