@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/common/constant/png_image_path.dart';
+import 'package:bloc_deep_dive/common/constant/svg_image_path.dart';
 import 'package:bloc_deep_dive/common/extension/date_time_extension.dart';
 import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
 import 'package:bloc_deep_dive/theme/color_style.dart';
@@ -13,9 +13,9 @@ class HomeTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PngImageWidget(
+        SvgImageWidget(
           width: 28,
-          imagePath: PngImagePath.logo,
+          imagePath: SvgImagePath.logo,
         ),
         const SizedBox(height: 12),
         Text(

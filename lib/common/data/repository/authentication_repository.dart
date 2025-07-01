@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:bloc_deep_dive/presentation/login/bloc/login_bloc.dart';
+
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
@@ -11,10 +13,7 @@ class AuthenticationRepository {
     yield* _controller.stream;
   }
 
-  Future<void> logIn({
-    required String username,
-    required String password,
-  }) async {
+  Future<void> logIn({required SSOType ssoType}) async {
     await Future.delayed(
       const Duration(milliseconds: 300),
       () => _controller.add(AuthenticationStatus.authenticated),

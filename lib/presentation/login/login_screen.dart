@@ -11,17 +11,20 @@ class LoginScreen extends BaseScreen {
   const LoginScreen({super.key});
 
   @override
+  bool get setBottomSafeArea => false;
+
+  @override
+  bool get setTopSafeArea => false;
+
+  @override
   Widget buildScreen(BuildContext context) {
     return BlocProvider(
       create:
           (context) => LoginBloc(
             authenticationRepository: context.read<AuthenticationRepository>(),
           ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: LoginForm(
-          onLoginButtonPressed: () => context.goNamed(RouterPath.splash),
-        ),
+      child: LoginForm(
+        onLoginButtonPressed: () => context.goNamed(RouterPath.splash),
       ),
     );
   }
