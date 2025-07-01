@@ -3,6 +3,23 @@
 # Bloc-Deep-Dive
 [영화진흥위원회 OpenAPI](https://www.kobis.or.kr/kobisopenapi/homepg/main/main.do)를 활용하여 만든 Bloc스터디 데모 프로젝트입니다.
 
+# 주요 사용 라이브러리
+
+  [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+  [equatable](https://pub.dev/packages/equatable)
+  <br>
+  [dio](https://pub.dev/packages/dio)
+  [retrofit](https://pub.dev/packages/retrofit)
+  <br>
+  
+  [flutter_hooks](https://pub.dev/packages/flutter_hooks)
+  [freezed](https://pub.dev/packages/freezed)
+  <br>
+  [get_it](https://pub.dev/packages/get_it) [injectable](https://pub.dev/packages/injectable)<br>
+  [go_router](https://pub.dev/packages/go_router)
+  
+  
+
 
 # OnBoard 화면
 <img width="330" alt="onboard" src="https://github.com/user-attachments/assets/bcb87d64-965d-4773-a4a3-f443958a1283" />
