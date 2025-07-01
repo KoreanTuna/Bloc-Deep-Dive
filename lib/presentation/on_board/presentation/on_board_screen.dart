@@ -1,3 +1,4 @@
+import 'package:bloc_deep_dive/common/data/repository/user_repository.dart';
 import 'package:bloc_deep_dive/common/extension/context_extension.dart';
 import 'package:bloc_deep_dive/presentation/on_board/data/models/favorite_genre_model.dart';
 import 'package:bloc_deep_dive/presentation/on_board/presentation/bloc/on_board_bloc.dart';
@@ -17,7 +18,10 @@ class OnBoardScreen extends BaseScreen {
   @override
   Widget buildScreen(BuildContext context) {
     return BlocProvider(
-      create: (_) => OnBoardBloc(),
+      create:
+          (_) => OnBoardBloc(
+            context.read<UserRepository>(),
+          ),
       child: BlocListener<OnBoardBloc, OnBoardState>(
         listenWhen: (previous, current) {
           return previous.isSubmitted != current.isSubmitted;
@@ -163,9 +167,14 @@ class OnBoardScreen extends BaseScreen {
                           );
                         },
                       ),
-                      BlocSelector<OnBoardBloc, OnBoardState, bool>(
-                        selector: (state) => state.selectedGenres.isNotEmpty,
-                        builder: (context, isEnabled) {
+                      BlocSelector<
+                        OnBoardBloc,
+                        OnBoardState,
+                        List<FavoriteGenre>
+                      >(
+                        selector: (state) => state.selectedGenres,
+                        builder: (context, selectedGenres) {
+                          final bool isEnabled = selectedGenres.isNotEmpty;
                           return ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
@@ -177,7 +186,7 @@ class OnBoardScreen extends BaseScreen {
                                 isEnabled
                                     ? () {
                                       context.read<OnBoardBloc>().add(
-                                        SubmitOnBoardEvent(),
+                                        SubmitOnBoardEvent(selectedGenres),
                                       );
                                     }
                                     : null,

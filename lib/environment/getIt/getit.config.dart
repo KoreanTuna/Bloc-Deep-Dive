@@ -22,24 +22,32 @@ import 'package:bloc_deep_dive/presentation/movie_detail/data/repository/movie_d
 import 'package:bloc_deep_dive/router/router.dart' as _i589;
 import 'package:bloc_deep_dive/router/router_observer.dart' as _i229;
 import 'package:bloc_deep_dive/util/dio.dart' as _i875;
+import 'package:bloc_deep_dive/util/local_storage/shared_pref_util.dart'
+    as _i491;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:go_router/go_router.dart' as _i583;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final sharedPreferencesModule = _$SharedPreferencesModule();
     final dioModule = _$DioModule();
     final goRouterModule = _$GoRouterModule();
     final boxOfficeDataSourceModule = _$BoxOfficeDataSourceModule();
     final movieDetailDataSourceModule = _$MovieDetailDataSourceModule();
     gh.singleton<_i32.AuthenticationNotifier>(
       () => _i32.AuthenticationNotifier(),
+    );
+    await gh.factoryAsync<_i460.SharedPreferences>(
+      () => sharedPreferencesModule.sharedPreferences,
+      preResolve: true,
     );
     gh.factory<_i229.RouterObserver>(() => _i229.RouterObserver());
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
@@ -53,6 +61,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i361.Dio>(),
       ),
     );
+    gh.singleton<_i491.SharedPrefUtil>(
+      () => _i491.SharedPrefUtil(
+        sharedPreferences: gh<_i460.SharedPreferences>(),
+      ),
+    );
     gh.lazySingleton<_i705.MovieDetailRepository>(
       () => _i705.MovieDetailRepository(gh<_i296.MovieDetailDataSource>()),
     );
@@ -62,6 +75,8 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$SharedPreferencesModule extends _i491.SharedPreferencesModule {}
 
 class _$DioModule extends _i875.DioModule {}
 

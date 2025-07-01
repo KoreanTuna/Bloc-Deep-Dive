@@ -9,7 +9,7 @@ abstract class SharedPreferencesModule {
       SharedPreferences.getInstance();
 }
 
-@lazySingleton
+@singleton
 class SharedPrefUtil {
   SharedPrefUtil({required this.sharedPreferences});
   final SharedPreferences sharedPreferences;
