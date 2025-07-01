@@ -33,29 +33,35 @@ class MoviePeopleInfo extends StatelessWidget {
           style: TextStyle().body2.copyWith(color: ColorStyle.coolGray500),
         ),
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 4,
-          children:
-              movieDetailInfo.actors
-                  .map(
-                    (actor) => Theme(
-                      data: Theme.of(context).copyWith(
-                        chipTheme: ChipThemeData(
-                          backgroundColor: Colors.transparent,
-                          surfaceTintColor: Colors.transparent,
-                          color: WidgetStateProperty.all(Colors.transparent),
-                        ),
-                      ),
-                      child: Chip(
-                        label: Text('${actor.peopleNm}(${actor.cast})'),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              children:
+                  movieDetailInfo.actors
+                      .map(
+                        (actor) => Theme(
+                          data: Theme.of(context).copyWith(
+                            chipTheme: ChipThemeData(
+                              backgroundColor: Colors.transparent,
+                              surfaceTintColor: Colors.transparent,
+                              color: WidgetStateProperty.all(
+                                Colors.transparent,
+                              ),
+                            ),
+                          ),
+                          child: Chip(
+                            label: Text('${actor.peopleNm}(${actor.cast})'),
 
-                        color: WidgetStateProperty.all(Colors.white),
-                        labelStyle: TextStyle().body2,
-                      ),
-                    ),
-                  )
-                  .toList(),
+                            color: WidgetStateProperty.all(Colors.white),
+                            labelStyle: TextStyle().body2,
+                          ),
+                        ),
+                      )
+                      .toList(),
+            ),
+          ),
         ),
       ],
     );
