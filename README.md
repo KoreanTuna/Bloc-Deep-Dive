@@ -93,3 +93,49 @@ Future<void> _onFetched(
   }
 ```
 
+# MovieDetail 화면
+![화면 기록 2025-07-01 오후 6 48 22](https://github.com/user-attachments/assets/da8d9805-b6ce-4f58-a052-58276e1249af)
+<br>
+<br>
+
+영화 상세 정보 API를 활용하여 영화의 개봉일, 제작사, 출연진, 장르와 같은 정보를 불러오는 화면입니다.
+데일리박스오피스와 동일한 형식의 Bloc패턴이 사용되었으나 데이터 Caching을 위해 Data 레이어단의 Repo에 Cache용 변수를 생성하여 
+동일한 영화코드의 요청이 들어온 경우 캐싱된 데이터를 리턴해주는 코드를 추가했습니다.
+<br>
+
+``` dart
+ MovieDetailModel? _cachedMovieDetail;
+
+  /// 영화 상세 정보 조회
+  Future<Result<MovieDetailModel>> getMovieDetail({
+    required String movieCd,
+    bool forceRefresh = false,
+  }) async {
+    // 캐시된 데이터가 있고, 강제 새로고침이 필요하지 않으면 캐시된 데이터를 반환
+    if (!forceRefresh &&
+        _cachedMovieDetail != null &&
+        _cachedMovieDetail!.movieInfo.movieCd == movieCd) {
+      return Result.ok(_cachedMovieDetail!);
+    }
+
+    try {
+      final MovieDetailResponseModel response = await _movieDetailDataSource
+          .getMovieDetail(
+            MovieDetailRequestModel(
+              key: ApiConfig.apiKey,
+              movieCd: movieCd,
+            ),
+          );
+      _cachedMovieDetail = response.movieInfoResult;
+      return Result.ok(response.movieInfoResult);
+    } catch (e) {
+      return Result.error(Exception('Failed to fetch movie details: $e'));
+    }
+  }
+}
+```
+
+
+
+
+
