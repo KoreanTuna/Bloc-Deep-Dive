@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {

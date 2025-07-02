@@ -1,6 +1,6 @@
-import 'package:bloc_deep_dive/environment/api_config.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_model.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_request_model.dart';
+import 'package:door_stamp/environment/api_config.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_model.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_request_model.dart';
 import 'package:dio/dio.dart' hide Headers;
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';

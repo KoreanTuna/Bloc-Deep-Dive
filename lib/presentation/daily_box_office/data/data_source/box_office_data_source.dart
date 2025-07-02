@@ -1,6 +1,6 @@
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_box_office_model.dart';
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_box_office_request_model.dart';
-import 'package:bloc_deep_dive/environment/api_config.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/models/daily_box_office_model.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/models/daily_box_office_request_model.dart';
+import 'package:door_stamp/environment/api_config.dart';
 import 'package:dio/dio.dart' hide Headers;
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';

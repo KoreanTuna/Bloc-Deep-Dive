@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "bloc_deep_dive" "\0"
+            VALUE "CompanyName", "com.minwoo" "\0"
+            VALUE "FileDescription", "door_stamp" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "bloc_deep_dive" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "bloc_deep_dive.exe" "\0"
-            VALUE "ProductName", "bloc_deep_dive" "\0"
+            VALUE "InternalName", "door_stamp" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.minwoo. All rights reserved." "\0"
+            VALUE "OriginalFilename", "door_stamp.exe" "\0"
+            VALUE "ProductName", "door_stamp" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

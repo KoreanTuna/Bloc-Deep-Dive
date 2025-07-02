@@ -1,10 +1,10 @@
-import 'package:bloc_deep_dive/common/bloc/authentication/authentication_bloc.dart';
-import 'package:bloc_deep_dive/common/data/repository/authentication_repository.dart';
-import 'package:bloc_deep_dive/common/data/repository/user_repository.dart';
-import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart';
-import 'package:bloc_deep_dive/environment/app_builder.dart';
-import 'package:bloc_deep_dive/environment/getIt/getit.dart';
-import 'package:bloc_deep_dive/util/local_storage/shared_pref_util.dart';
+import 'package:door_stamp/common/bloc/authentication/authentication_bloc.dart';
+import 'package:door_stamp/common/data/repository/authentication_repository.dart';
+import 'package:door_stamp/common/data/repository/user_repository.dart';
+import 'package:door_stamp/common/notifier/authentication_notifier.dart';
+import 'package:door_stamp/environment/app_builder.dart';
+import 'package:door_stamp/environment/getIt/getit.dart';
+import 'package:door_stamp/util/local_storage/shared_pref_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

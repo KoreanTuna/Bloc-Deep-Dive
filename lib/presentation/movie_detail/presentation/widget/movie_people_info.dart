@@ -1,6 +1,6 @@
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_model.dart';
-import 'package:bloc_deep_dive/theme/color_style.dart';
-import 'package:bloc_deep_dive/theme/text_style.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_model.dart';
+import 'package:door_stamp/theme/color_style.dart';
+import 'package:door_stamp/theme/text_style.dart';
 import 'package:flutter/material.dart';
 
 class MoviePeopleInfo extends StatelessWidget {

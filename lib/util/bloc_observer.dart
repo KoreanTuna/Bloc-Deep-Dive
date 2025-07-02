@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/util/logger.dart';
+import 'package:door_stamp/util/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SimpleBlocObserver extends BlocObserver {

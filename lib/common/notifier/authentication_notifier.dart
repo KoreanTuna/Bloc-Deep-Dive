@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/common/data/repository/authentication_repository.dart';
+import 'package:door_stamp/common/data/repository/authentication_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 

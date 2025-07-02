@@ -1,10 +1,10 @@
-import 'package:bloc_deep_dive/common/constant/svg_image_path.dart';
-import 'package:bloc_deep_dive/common/extension/context_extension.dart';
-import 'package:bloc_deep_dive/presentation/login/bloc/login_bloc.dart';
-import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
-import 'package:bloc_deep_dive/router/router_path.dart';
-import 'package:bloc_deep_dive/theme/color_style.dart';
-import 'package:bloc_deep_dive/theme/text_style.dart';
+import 'package:door_stamp/common/constant/svg_image_path.dart';
+import 'package:door_stamp/common/extension/context_extension.dart';
+import 'package:door_stamp/presentation/login/bloc/login_bloc.dart';
+import 'package:door_stamp/presentation/widget/image_widget.dart';
+import 'package:door_stamp/router/router_path.dart';
+import 'package:door_stamp/theme/color_style.dart';
+import 'package:door_stamp/theme/text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

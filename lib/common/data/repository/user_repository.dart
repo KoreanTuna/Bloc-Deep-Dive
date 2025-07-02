@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:bloc_deep_dive/common/constant/shared_pref_key.dart';
-import 'package:bloc_deep_dive/common/data/models/user.dart';
-import 'package:bloc_deep_dive/presentation/on_board/data/models/favorite_genre_model.dart';
-import 'package:bloc_deep_dive/util/local_storage/shared_pref_util.dart';
+import 'package:door_stamp/common/constant/shared_pref_key.dart';
+import 'package:door_stamp/common/data/models/user.dart';
+import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/util/local_storage/shared_pref_util.dart';
 import 'package:uuid/uuid.dart';
 
 class UserRepository {

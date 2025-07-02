@@ -1,9 +1,9 @@
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_model.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/data/repository/movie_detail_repository.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/presentation/bloc/movie_detail_event.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/presentation/bloc/movie_detail_state.dart';
-import 'package:bloc_deep_dive/util/result.dart';
-import 'package:bloc_deep_dive/util/stream_transform.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_model.dart';
+import 'package:door_stamp/presentation/movie_detail/data/repository/movie_detail_repository.dart';
+import 'package:door_stamp/presentation/movie_detail/presentation/bloc/movie_detail_event.dart';
+import 'package:door_stamp/presentation/movie_detail/presentation/bloc/movie_detail_state.dart';
+import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/util/stream_transform.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {

@@ -1,7 +1,7 @@
-import 'package:bloc_deep_dive/common/data/models/user.dart';
-import 'package:bloc_deep_dive/common/data/repository/authentication_repository.dart';
-import 'package:bloc_deep_dive/common/data/repository/user_repository.dart';
-import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart';
+import 'package:door_stamp/common/data/models/user.dart';
+import 'package:door_stamp/common/data/repository/authentication_repository.dart';
+import 'package:door_stamp/common/data/repository/user_repository.dart';
+import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

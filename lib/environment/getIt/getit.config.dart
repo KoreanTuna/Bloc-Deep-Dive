@@ -9,21 +9,20 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:bloc_deep_dive/common/notifier/authentication_notifier.dart'
+import 'package:door_stamp/common/notifier/authentication_notifier.dart'
     as _i32;
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
+import 'package:door_stamp/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
     as _i19;
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/repository/box_office_repository.dart'
+import 'package:door_stamp/presentation/daily_box_office/data/repository/box_office_repository.dart'
     as _i889;
-import 'package:bloc_deep_dive/presentation/movie_detail/data/data_source/movie_detail_data_source.dart'
+import 'package:door_stamp/presentation/movie_detail/data/data_source/movie_detail_data_source.dart'
     as _i296;
-import 'package:bloc_deep_dive/presentation/movie_detail/data/repository/movie_detail_repository.dart'
+import 'package:door_stamp/presentation/movie_detail/data/repository/movie_detail_repository.dart'
     as _i705;
-import 'package:bloc_deep_dive/router/router.dart' as _i589;
-import 'package:bloc_deep_dive/router/router_observer.dart' as _i229;
-import 'package:bloc_deep_dive/util/dio.dart' as _i875;
-import 'package:bloc_deep_dive/util/local_storage/shared_pref_util.dart'
-    as _i491;
+import 'package:door_stamp/router/router.dart' as _i589;
+import 'package:door_stamp/router/router_observer.dart' as _i229;
+import 'package:door_stamp/util/dio.dart' as _i875;
+import 'package:door_stamp/util/local_storage/shared_pref_util.dart' as _i491;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:go_router/go_router.dart' as _i583;

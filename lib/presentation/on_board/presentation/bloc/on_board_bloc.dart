@@ -1,5 +1,5 @@
-import 'package:bloc_deep_dive/common/data/repository/user_repository.dart';
-import 'package:bloc_deep_dive/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/common/data/repository/user_repository.dart';
+import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

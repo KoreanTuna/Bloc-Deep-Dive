@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/theme/color_style.dart';
+import 'package:door_stamp/theme/color_style.dart';
 import 'package:flutter/material.dart';
 
 const String pretendardFontFamily = 'Pretendard';

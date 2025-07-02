@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/util/logger.dart';
+import 'package:door_stamp/util/logger.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 

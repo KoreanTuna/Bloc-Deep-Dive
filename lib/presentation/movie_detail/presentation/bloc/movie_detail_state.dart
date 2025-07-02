@@ -1,4 +1,4 @@
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_model.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_model.dart';
 import 'package:equatable/equatable.dart';
 
 enum MovieDetailStatus {

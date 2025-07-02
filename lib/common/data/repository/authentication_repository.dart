@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc_deep_dive/presentation/login/bloc/login_bloc.dart';
+import 'package:door_stamp/presentation/login/bloc/login_bloc.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 

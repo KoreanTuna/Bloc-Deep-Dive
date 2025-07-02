@@ -1,8 +1,8 @@
-import 'package:bloc_deep_dive/common/constant/png_image_path.dart';
-import 'package:bloc_deep_dive/presentation/on_board/data/models/favorite_genre_model.dart';
-import 'package:bloc_deep_dive/presentation/widget/image_widget.dart';
-import 'package:bloc_deep_dive/theme/color_style.dart';
-import 'package:bloc_deep_dive/theme/text_style.dart';
+import 'package:door_stamp/common/constant/png_image_path.dart';
+import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/presentation/widget/image_widget.dart';
+import 'package:door_stamp/theme/color_style.dart';
+import 'package:door_stamp/theme/text_style.dart';
 import 'package:flutter/material.dart';
 
 class GenreCard extends StatelessWidget {

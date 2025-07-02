@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:bloc_deep_dive/common/constant/svg_image_path.dart';
-import 'package:bloc_deep_dive/common/data/repository/authentication_repository.dart';
-import 'package:bloc_deep_dive/theme/color_style.dart';
+import 'package:door_stamp/common/constant/svg_image_path.dart';
+import 'package:door_stamp/common/data/repository/authentication_repository.dart';
+import 'package:door_stamp/theme/color_style.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

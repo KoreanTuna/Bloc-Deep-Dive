@@ -1,7 +1,7 @@
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_box_office_model.dart';
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/repository/box_office_repository.dart';
-import 'package:bloc_deep_dive/util/result.dart';
-import 'package:bloc_deep_dive/util/stream_transform.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/models/daily_box_office_model.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/repository/box_office_repository.dart';
+import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/util/stream_transform.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

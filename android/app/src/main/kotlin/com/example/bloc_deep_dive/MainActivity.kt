@@ -1,4 +1,4 @@
-package com.example.bloc_deep_dive
+package com.minwoo.door_stamp
 
 import io.flutter.embedding.android.FlutterActivity
 

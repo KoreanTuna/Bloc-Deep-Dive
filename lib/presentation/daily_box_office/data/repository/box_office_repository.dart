@@ -1,8 +1,8 @@
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/data_source/box_office_data_source.dart';
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_box_office_model.dart';
-import 'package:bloc_deep_dive/presentation/daily_box_office/data/models/daily_box_office_request_model.dart';
-import 'package:bloc_deep_dive/environment/api_config.dart';
-import 'package:bloc_deep_dive/util/result.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/data_source/box_office_data_source.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/models/daily_box_office_model.dart';
+import 'package:door_stamp/presentation/daily_box_office/data/models/daily_box_office_request_model.dart';
+import 'package:door_stamp/environment/api_config.dart';
+import 'package:door_stamp/util/result.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton

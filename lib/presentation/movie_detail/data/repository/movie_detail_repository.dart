@@ -1,8 +1,8 @@
-import 'package:bloc_deep_dive/environment/api_config.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/data/data_source/movie_detail_data_source.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_model.dart';
-import 'package:bloc_deep_dive/presentation/movie_detail/data/models/movie_detail_request_model.dart';
-import 'package:bloc_deep_dive/util/result.dart';
+import 'package:door_stamp/environment/api_config.dart';
+import 'package:door_stamp/presentation/movie_detail/data/data_source/movie_detail_data_source.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_model.dart';
+import 'package:door_stamp/presentation/movie_detail/data/models/movie_detail_request_model.dart';
+import 'package:door_stamp/util/result.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
