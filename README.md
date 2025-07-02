@@ -22,34 +22,39 @@
 # Login 화면
 <img width="330" alt="login" src="https://github.com/user-attachments/assets/2c85b0ba-6f86-495e-bf3f-54444905a40a" /><br>
 로그인 과정을 담당하는 LoginBloc과 사용자 정보를 담당하는 UserBloc간 의존성 관계가 생기지 않도록<br>
-각 Bloc의 BlocListener를 중첩하여 Login Event가 성공했을때, UserEvent를 발생시키도록 배치.
+각 Bloc의 BlocListener를 MultiBlocListener 안에 배치하여 Login Event가 성공했을때, UserEvent를 발생시키도록 한다.
 <br>
 
 ``` dart
- return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state.status.isFailure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text(
-                  '로그인에 실패했습니다.',
-                  style: TextStyle().body2.copyWith(color: ColorStyle.white),
-                ),
-              ),
-            );
-        }
-
-        if (state.status.isSuccess) {
-          context.read<UserBloc>().add(
-            UserDataRequested(userId: state.user.id),
-          );
-        }
-      },
-      child: BlocListener<UserBloc, UserState>(
-        listener: (context, state) {
-          if (state is UserError) {
+return MultiBlocListener(
+      listeners: [
+        BlocListener<LoginBloc, LoginState>(
+          listenWhen:
+              (previous, current) =>
+                  previous.status != current.status &&
+                  current.status.isInProgressOrSuccess,
+          listener: (context, state) {
+            if (state.status.isInProgress) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '로그인 중입니다...',
+                      style: TextStyle().body2.copyWith(
+                        color: ColorStyle.white,
+                      ),
+                    ),
+                  ),
+                );
+            }
+          },
+        ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen:
+              (previous, current) =>
+                  previous is! UserError && current is UserError,
+          listener: (context, state) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
@@ -60,12 +65,18 @@
                   ),
                 ),
               );
-            return;
-          }
-
-          /// 사용자 정보 불러오기 성공
-          context.goNamed(RouterPath.splash);
-        },
+          },
+        ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen:
+              (previous, current) =>
+                  previous is! UserLoaded && current is UserLoaded,
+          listener: (context, state) {
+            /// 사용자 정보 불러오기 성공
+            context.goNamed(RouterPath.splash);
+          },
+        ),
+      ],
 ```
 
 
