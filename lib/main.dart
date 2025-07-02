@@ -1,4 +1,5 @@
 import 'package:door_stamp/common/bloc/authentication/authentication_bloc.dart';
+import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/common/notifier/authentication_notifier.dart';
@@ -23,7 +24,10 @@ class MainApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (_) => AuthenticationRepository(),
+          create:
+              (_) => AuthenticationRepository(
+                firestoreDataSource: locator<FirestoreDataSource>(),
+              ),
           dispose: (repository) => repository.dispose(),
         ),
         RepositoryProvider(

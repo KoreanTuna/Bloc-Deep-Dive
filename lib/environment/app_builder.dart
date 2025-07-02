@@ -12,12 +12,12 @@ abstract class AppBuilder {
   static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    /// GetIt config
-    await setUpGetItConfig();
-
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+
+    /// GetIt config
+    await setUpGetItConfig();
 
     /// API config
     await dotenv.load(fileName: ".env");

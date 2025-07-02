@@ -1,4 +1,4 @@
-import 'package:door_stamp/common/data/models/user.dart';
+import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/common/notifier/authentication_notifier.dart';
@@ -67,7 +67,7 @@ class AuthenticationBloc
     _authenticationRepository.logOut();
   }
 
-  Future<User?> _tryGetUser() async {
+  Future<UserModel?> _tryGetUser() async {
     try {
       final user = await _userRepository.getUser();
       return user;

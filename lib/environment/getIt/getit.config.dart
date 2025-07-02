@@ -9,21 +9,23 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:door_stamp/common/notifier/authentication_notifier.dart'
-    as _i32;
-import 'package:door_stamp/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
-    as _i19;
-import 'package:door_stamp/presentation/daily_box_office/data/repository/box_office_repository.dart'
-    as _i889;
-import 'package:door_stamp/presentation/movie_detail/data/data_source/movie_detail_data_source.dart'
-    as _i296;
-import 'package:door_stamp/presentation/movie_detail/data/repository/movie_detail_repository.dart'
-    as _i705;
-import 'package:door_stamp/router/router.dart' as _i589;
-import 'package:door_stamp/router/router_observer.dart' as _i229;
-import 'package:door_stamp/util/dio.dart' as _i875;
-import 'package:door_stamp/util/local_storage/shared_pref_util.dart' as _i491;
 import 'package:dio/dio.dart' as _i361;
+import 'package:door_stamp/common/data/data_source/firestore_data_source.dart'
+    as _i622;
+import 'package:door_stamp/common/notifier/authentication_notifier.dart'
+    as _i660;
+import 'package:door_stamp/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
+    as _i930;
+import 'package:door_stamp/presentation/daily_box_office/data/repository/box_office_repository.dart'
+    as _i703;
+import 'package:door_stamp/presentation/movie_detail/data/data_source/movie_detail_data_source.dart'
+    as _i1027;
+import 'package:door_stamp/presentation/movie_detail/data/repository/movie_detail_repository.dart'
+    as _i318;
+import 'package:door_stamp/router/router.dart' as _i498;
+import 'package:door_stamp/router/router_observer.dart' as _i676;
+import 'package:door_stamp/util/dio.dart' as _i681;
+import 'package:door_stamp/util/local_storage/shared_pref_util.dart' as _i851;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:go_router/go_router.dart' as _i583;
 import 'package:injectable/injectable.dart' as _i526;
@@ -41,46 +43,48 @@ extension GetItInjectableX on _i174.GetIt {
     final goRouterModule = _$GoRouterModule();
     final boxOfficeDataSourceModule = _$BoxOfficeDataSourceModule();
     final movieDetailDataSourceModule = _$MovieDetailDataSourceModule();
-    gh.singleton<_i32.AuthenticationNotifier>(
-      () => _i32.AuthenticationNotifier(),
+    gh.singleton<_i660.AuthenticationNotifier>(
+      () => _i660.AuthenticationNotifier(),
     );
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPreferencesModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i229.RouterObserver>(() => _i229.RouterObserver());
+    gh.factory<_i676.RouterObserver>(() => _i676.RouterObserver());
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
+    gh.singleton<_i622.FirestoreDataSource>(() => _i622.FirestoreDataSource());
     gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
-    gh.lazySingleton<_i19.BoxOfficeDataSource>(
+    gh.lazySingleton<_i930.BoxOfficeDataSource>(
       () =>
           boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
     );
-    gh.lazySingleton<_i296.MovieDetailDataSource>(
+    gh.lazySingleton<_i1027.MovieDetailDataSource>(
       () => movieDetailDataSourceModule.provideMovieDetailDataSource(
         gh<_i361.Dio>(),
       ),
     );
-    gh.singleton<_i491.SharedPrefUtil>(
-      () => _i491.SharedPrefUtil(
+    gh.lazySingleton<_i318.MovieDetailRepository>(
+      () => _i318.MovieDetailRepository(gh<_i1027.MovieDetailDataSource>()),
+    );
+    gh.singleton<_i851.SharedPrefUtil>(
+      () => _i851.SharedPrefUtil(
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
-    gh.lazySingleton<_i705.MovieDetailRepository>(
-      () => _i705.MovieDetailRepository(gh<_i296.MovieDetailDataSource>()),
-    );
-    gh.singleton<_i889.BoxOfficeRepository>(
-      () => _i889.BoxOfficeRepository(gh<_i19.BoxOfficeDataSource>()),
+    gh.singleton<_i703.BoxOfficeRepository>(
+      () => _i703.BoxOfficeRepository(gh<_i930.BoxOfficeDataSource>()),
     );
     return this;
   }
 }
 
-class _$SharedPreferencesModule extends _i491.SharedPreferencesModule {}
+class _$SharedPreferencesModule extends _i851.SharedPreferencesModule {}
 
-class _$DioModule extends _i875.DioModule {}
+class _$DioModule extends _i681.DioModule {}
 
-class _$GoRouterModule extends _i589.GoRouterModule {}
+class _$GoRouterModule extends _i498.GoRouterModule {}
 
-class _$BoxOfficeDataSourceModule extends _i19.BoxOfficeDataSourceModule {}
+class _$BoxOfficeDataSourceModule extends _i930.BoxOfficeDataSourceModule {}
 
-class _$MovieDetailDataSourceModule extends _i296.MovieDetailDataSourceModule {}
+class _$MovieDetailDataSourceModule
+    extends _i1027.MovieDetailDataSourceModule {}

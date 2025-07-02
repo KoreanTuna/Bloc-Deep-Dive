@@ -3,24 +3,14 @@ import 'package:door_stamp/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
-class FirestoreRepsitory {
-  FirestoreRepsitory._(this._firestore);
+@singleton
+class FirestoreDataSource {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  final FirebaseFirestore _firestore;
-  factory FirestoreRepsitory() {
-    return FirestoreRepsitory._(FirebaseFirestore.instance);
-  }
-  Result<DocumentReference> getDoc({required String path, String? docId}) {
-    try {
-      final DocumentReference reference = _firestore
-          .collection(path)
-          .doc(docId);
-      return Result.ok(reference);
-    } catch (e) {
-      logger.d('getDocError: $e');
-      return Result.error(Exception('Failed to get document reference'));
-    }
+  DocumentReference getDoc({required String path, String? docId}) {
+    final DocumentReference reference = _firestore.collection(path).doc(docId);
+
+    return reference;
   }
 
   Future<Result<QuerySnapshot>> getCollection({required String path}) async {

@@ -20,7 +20,8 @@ class SplashScreen extends BaseScreen {
         logger.d('SplashScreen: AuthenticationState changed: $state');
         switch (state.status) {
           case AuthenticationStatus.authenticated:
-            state.user.favoriteGenres.isEmpty
+            state.user.favoriteGenres == null ||
+                    state.user.favoriteGenres!.isEmpty
                 ? context.goNamed(RouterPath.onboard)
                 : context.goNamed(RouterPath.home);
 
