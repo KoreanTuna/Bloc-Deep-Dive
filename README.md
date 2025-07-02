@@ -20,9 +20,10 @@
   
   
 # Login 화면
-<img width="330" alt="login" src="https://github.com/user-attachments/assets/2c85b0ba-6f86-495e-bf3f-54444905a40a" />
-로그인 과정을 담당하는 LoginBloc과 사용자 정보를 담당하는 UserBloc간 의존성 관계가 생기지 않도록
+<img width="330" alt="login" src="https://github.com/user-attachments/assets/2c85b0ba-6f86-495e-bf3f-54444905a40a" /><br>
+로그인 과정을 담당하는 LoginBloc과 사용자 정보를 담당하는 UserBloc간 의존성 관계가 생기지 않도록<br>
 각 Bloc의 BlocListener를 중첩하여 Login Event가 성공했을때, UserEvent를 발생시키도록 배치.
+<br>
 
 ``` dart
  return BlocListener<LoginBloc, LoginState>(
