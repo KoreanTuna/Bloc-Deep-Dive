@@ -1,6 +1,5 @@
 import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
-import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,10 +11,9 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
     required AuthenticationRepository authenticationRepository,
-    required UserRepository userRepository,
     required AuthenticationNotifier authenticationNotifier,
   }) : _authenticationRepository = authenticationRepository,
-       _userRepository = userRepository,
+
        _authenticationNotifier = authenticationNotifier,
        super(const AuthenticationState.unknown()) {
     on<AuthenticationSubscriptionRequested>(_onSubscriptionRequested);
@@ -23,7 +21,6 @@ class AuthenticationBloc
   }
 
   final AuthenticationRepository _authenticationRepository;
-  final UserRepository _userRepository;
   final AuthenticationNotifier _authenticationNotifier;
 
   Future<void> _onSubscriptionRequested(
@@ -40,17 +37,11 @@ class AuthenticationBloc
             );
             return emit(const AuthenticationState.unauthenticated());
           case AuthenticationStatus.authenticated:
-            final user = await _tryGetUser();
             _authenticationNotifier.setStatus(
-              user != null
-                  ? AuthenticationStatus.authenticated
-                  : AuthenticationStatus.unauthenticated,
+              AuthenticationStatus.authenticated,
             );
-            return emit(
-              user != null
-                  ? AuthenticationState.authenticated(user)
-                  : const AuthenticationState.unauthenticated(),
-            );
+            emit(const AuthenticationState.authenticated());
+
           case AuthenticationStatus.unknown:
             _authenticationNotifier.setStatus(AuthenticationStatus.unknown);
             return emit(const AuthenticationState.unknown());
@@ -65,14 +56,5 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) {
     _authenticationRepository.logOut();
-  }
-
-  Future<UserModel?> _tryGetUser() async {
-    try {
-      final user = await _userRepository.getUser();
-      return user;
-    } catch (_) {
-      return null;
-    }
   }
 }

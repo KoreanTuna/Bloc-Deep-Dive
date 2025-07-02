@@ -1,4 +1,5 @@
 import 'package:door_stamp/common/bloc/authentication/authentication_bloc.dart';
+import 'package:door_stamp/common/bloc/user/user_bloc.dart';
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
@@ -24,25 +25,33 @@ class MainApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create:
-              (_) => AuthenticationRepository(
-                firestoreDataSource: locator<FirestoreDataSource>(),
-              ),
+          create: (_) => AuthenticationRepository(),
           dispose: (repository) => repository.dispose(),
         ),
         RepositoryProvider(
-          create: (_) => UserRepository(locator<SharedPrefUtil>()),
+          create:
+              (_) => UserRepository(
+                locator<SharedPrefUtil>(),
+                locator<FirestoreDataSource>(),
+              ),
         ),
       ],
-      child: BlocProvider(
-        lazy: false,
-        create:
-            (context) => AuthenticationBloc(
-              authenticationRepository:
-                  context.read<AuthenticationRepository>(),
-              userRepository: context.read<UserRepository>(),
-              authenticationNotifier: locator<AuthenticationNotifier>(),
-            )..add(AuthenticationSubscriptionRequested()),
+
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            lazy: false,
+            create:
+                (context) => AuthenticationBloc(
+                  authenticationRepository:
+                      context.read<AuthenticationRepository>(),
+                  authenticationNotifier: locator<AuthenticationNotifier>(),
+                )..add(AuthenticationSubscriptionRequested()),
+          ),
+          BlocProvider(
+            create: (context) => UserBloc(context.read<UserRepository>()),
+          ),
+        ],
         child: MaterialApp.router(
           routerConfig: locator<GoRouter>(),
           theme: ThemeData(colorSchemeSeed: Colors.indigo),

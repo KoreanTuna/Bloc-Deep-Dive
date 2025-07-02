@@ -65,22 +65,25 @@ final class LoginState extends Equatable {
   const LoginState({
     this.status = FormzSubmissionStatus.initial,
     this.ssoType,
+    this.user = UserModel.empty,
   });
 
   final FormzSubmissionStatus status;
   final SSOType? ssoType;
+  final UserModel user;
 
   LoginState copyWith({
     FormzSubmissionStatus? status,
     SSOType? ssoType,
-    bool? isValid,
+    UserModel? user,
   }) {
     return LoginState(
       status: status ?? this.status,
       ssoType: ssoType ?? this.ssoType,
+      user: user ?? this.user,
     );
   }
 
   @override
-  List<Object> get props => [status, ssoType ?? ''];
+  List<Object> get props => [status, ssoType ?? '', user];
 }

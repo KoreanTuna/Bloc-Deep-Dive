@@ -42,38 +42,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final Result<UserCredential> result =
             await _authenticationRepository.signInWithGoogle();
         logger.d('Google Sign-In result: $result');
-
-        if (result is Ok<UserCredential>) {
-          final Result<void> userSaveResult = await _authenticationRepository
-              .setUserData(
-                UserModel(
-                  id: result.value.user?.uid ?? '',
-                  name: result.value.user?.displayName ?? '',
-                  email: result.value.user?.email ?? '',
-                  accessToken: result.value.credential!.accessToken!,
+        result.when(
+          ok: (_) {
+            logger.d('User data saved successfully.');
+            emit(
+              state.copyWith(
+                status: FormzSubmissionStatus.success,
+                user: UserModel(
+                  id: state.user.id,
+                  email: state.user.email,
+                  name: state.user.name,
+                  provider: ssoType,
+                  accessToken: state.user.accessToken,
                 ),
-              );
+              ),
+            );
+          },
+          error: (error) {
+            logger.e('Failed to save user data: $error');
+            emit(state.copyWith(status: FormzSubmissionStatus.failure));
+          },
+        );
 
-          userSaveResult.when(
-            ok: (_) {
-              logger.d('User data saved successfully.');
-              emit(
-                state.copyWith(status: FormzSubmissionStatus.success),
-              );
-            },
-            error: (error) {
-              logger.e('Failed to save user data: $error');
-              emit(state.copyWith(status: FormzSubmissionStatus.failure));
-            },
-          );
-
-          emit(state.copyWith(status: FormzSubmissionStatus.success));
-        } else {
-          logger.e('Google Sign-In failed: $result');
-          emit(
-            state.copyWith(status: FormzSubmissionStatus.failure),
-          );
-        }
         break;
       default:
     }

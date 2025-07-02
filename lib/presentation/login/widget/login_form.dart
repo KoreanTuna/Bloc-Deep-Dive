@@ -1,3 +1,4 @@
+import 'package:door_stamp/common/bloc/user/user_bloc.dart';
 import 'package:door_stamp/common/constant/svg_image_path.dart';
 import 'package:door_stamp/common/extension/context_extension.dart';
 import 'package:door_stamp/presentation/login/bloc/login_bloc.dart';
@@ -12,9 +13,7 @@ import 'package:formz/formz.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key, required this.onLoginButtonPressed});
-
-  final VoidCallback onLoginButtonPressed;
+  const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,91 +27,118 @@ class LoginForm extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              const SnackBar(content: Text('Authentication Failure')),
+              SnackBar(
+                content: Text(
+                  '로그인에 실패했습니다.',
+                  style: TextStyle().body2.copyWith(color: ColorStyle.white),
+                ),
+              ),
             );
         }
 
         if (state.status.isSuccess) {
-          context.goNamed(RouterPath.splash);
+          context.read<UserBloc>().add(
+            UserDataRequested(userId: state.user.id),
+          );
         }
       },
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SizedBox(
-              width: context.screenSize.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox.shrink(),
-                  Column(
-                    spacing: 8,
-                    children: [
-                      SvgImageWidget(
-                        width: 78,
-                        height: 78,
-                        fit: BoxFit.cover,
-                        imagePath: SvgImagePath.logo,
-                      ),
-                      Text(
-                        'DOOR STAMP',
-                        style: TextStyle().subTitle3,
-                      ),
-                    ],
+      child: BlocListener<UserBloc, UserState>(
+        listener: (context, state) {
+          if (state is UserError) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                SnackBar(
+                  content: Text(
+                    '사용자 정보를 가져오는 데 실패했습니다.',
+                    style: TextStyle().body2.copyWith(color: ColorStyle.white),
                   ),
+                ),
+              );
+            return;
+          }
 
-                  Column(
-                    spacing: 12,
-                    children: [
-                      Text(
-                        ' 간편하게 로그인하고\n다양한 서비스를 이용하세요',
-                        style: TextStyle().body2,
-                        textAlign: TextAlign.center,
-                      ),
-                      Column(
-                        children:
-                            SSOType.values
-                                .map(
-                                  (ssoType) => Padding(
-                                    padding: const EdgeInsets.only(
-                                      bottom: 12.0,
-                                    ),
-                                    child: _LoginButton(
-                                      ssoType: ssoType,
-                                      onLoginButtonPressed: () {
-                                        context.read<LoginBloc>().add(
-                                          LoginSubmitted(ssoType),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                      ),
-                      Text(
-                        '로그인 시 이용약관 / 개인정보 처리방침 동의로 간주합니다',
-                        style: TextStyle().detail.copyWith(
-                          color: ColorStyle.coolGray500,
+          /// 사용자 정보 불러오기 성공
+          context.goNamed(RouterPath.splash);
+        },
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                width: context.screenSize.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox.shrink(),
+                    Column(
+                      spacing: 8,
+                      children: [
+                        SvgImageWidget(
+                          width: 78,
+                          height: 78,
+                          fit: BoxFit.cover,
+                          imagePath: SvgImagePath.logo,
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          'DOOR STAMP',
+                          style: TextStyle().subTitle3,
+                        ),
+                      ],
+                    ),
+
+                    Column(
+                      spacing: 12,
+                      children: [
+                        Text(
+                          ' 간편하게 로그인하고\n다양한 서비스를 이용하세요',
+                          style: TextStyle().body2,
+                          textAlign: TextAlign.center,
+                        ),
+                        Column(
+                          children:
+                              SSOType.values
+                                  .map(
+                                    (ssoType) => Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 12.0,
+                                      ),
+                                      child: _LoginButton(
+                                        ssoType: ssoType,
+                                        onLoginButtonPressed: () {
+                                          context.read<LoginBloc>().add(
+                                            LoginSubmitted(ssoType),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                        ),
+                        Text(
+                          '로그인 시 이용약관 / 개인정보 처리방침 동의로 간주합니다',
+                          style: TextStyle().detail.copyWith(
+                            color: ColorStyle.coolGray500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          if (isInProgressOrSuccess)
-            Container(
-              width: context.screenSize.width,
-              height: context.screenSize.height,
-              color: ColorStyle.gray850.withValues(alpha: 0.3),
-              child: const Center(
-                child: CupertinoActivityIndicator(),
+            if (isInProgressOrSuccess)
+              Container(
+                width: context.screenSize.width,
+                height: context.screenSize.height,
+                color: ColorStyle.gray850.withValues(alpha: 0.3),
+                child: const Center(
+                  child: CupertinoActivityIndicator(),
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
