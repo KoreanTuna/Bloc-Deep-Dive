@@ -42,6 +42,16 @@ class LoginForm extends StatelessWidget {
                   ),
                 );
             }
+
+            if (state.status.isSuccess) {
+              context.read<UserBloc>().add(
+                UserDataRequested(
+                  userId: state.user.id,
+                  // 사용자 로그인 정보
+                  loginUserModel: state.user,
+                ),
+              );
+            }
           },
         ),
         BlocListener<UserBloc, UserState>(
@@ -49,6 +59,8 @@ class LoginForm extends StatelessWidget {
               (previous, current) =>
                   previous is! UserError && current is UserError,
           listener: (context, state) {
+            /// 사용자 정보 불러오기 실패
+            context.read<LoginBloc>().add(LoginReset());
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(

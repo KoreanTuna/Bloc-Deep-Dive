@@ -16,6 +16,14 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       (json['favoriteGenres'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$FavoriteGenreEnumMap, e))
           .toList(),
+  createdAt:
+      json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
 );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -24,6 +32,8 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
   'provider': _$SSOTypeEnumMap[instance.provider],
   'email': instance.email,
   'accessToken': instance.accessToken,
+  'createdAt': instance.createdAt?.toIso8601String(),
+  'updatedAt': instance.updatedAt?.toIso8601String(),
   'favoriteGenres':
       instance.favoriteGenres?.map((e) => _$FavoriteGenreEnumMap[e]!).toList(),
 };

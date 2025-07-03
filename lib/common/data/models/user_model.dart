@@ -13,6 +13,8 @@ class UserModel extends Equatable {
     required this.email,
     required this.accessToken,
     this.favoriteGenres,
+    this.createdAt,
+    this.updatedAt,
   });
 
   /// UserCredential UID
@@ -26,6 +28,9 @@ class UserModel extends Equatable {
   final String email;
   final String accessToken;
 
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+
   /// 사용자가 온보딩과정에서 선택한 장르
   final List<FavoriteGenre>? favoriteGenres;
 
@@ -36,6 +41,8 @@ class UserModel extends Equatable {
     String? accessToken,
     SSOType? provider,
     List<FavoriteGenre>? favoriteGenres,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -44,6 +51,8 @@ class UserModel extends Equatable {
       accessToken: accessToken ?? this.accessToken,
       provider: provider ?? this.provider,
       favoriteGenres: favoriteGenres ?? this.favoriteGenres,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 

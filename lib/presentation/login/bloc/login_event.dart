@@ -15,3 +15,7 @@ final class LoginSubmitted extends LoginEvent {
   @override
   List<Object> get props => [ssoType];
 }
+
+final class LoginReset extends LoginEvent {
+  const LoginReset();
+}

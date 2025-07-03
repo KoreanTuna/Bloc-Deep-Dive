@@ -6,11 +6,15 @@ sealed class UserEvent extends Equatable {
 
 final class UserDataRequested extends UserEvent {
   final String userId;
+  final UserModel? loginUserModel; // nullable
 
-  const UserDataRequested({required this.userId});
+  const UserDataRequested({
+    required this.userId,
+    this.loginUserModel,
+  });
 
   @override
-  List<Object> get props => [userId];
+  List<Object?> get props => [userId, loginUserModel];
 }
 
 final class UserDataUpdated extends UserEvent {

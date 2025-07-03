@@ -20,6 +20,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     : _authenticationRepository = authenticationRepository,
       super(const LoginState()) {
     on<LoginSubmitted>(_onSubmitted);
+    on<LoginReset>((event, emit) {
+      emit(const LoginState());
+    });
   }
 
   final AuthenticationRepository _authenticationRepository;
@@ -43,17 +46,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             await _authenticationRepository.signInWithGoogle();
         logger.d('Google Sign-In result: $result');
         result.when(
-          ok: (_) {
+          ok: (userResult) {
             logger.d('User data saved successfully.');
             emit(
               state.copyWith(
                 status: FormzSubmissionStatus.success,
                 user: UserModel(
-                  id: state.user.id,
-                  email: state.user.email,
-                  name: state.user.name,
+                  id: userResult.user!.uid,
+                  email: userResult.user!.email ?? '',
+                  name: userResult.user!.displayName ?? '',
                   provider: ssoType,
-                  accessToken: state.user.accessToken,
+                  accessToken: userResult.credential?.accessToken ?? '',
                 ),
               ),
             );

@@ -18,7 +18,7 @@ class UserRepository {
   final FirestoreDataSource _firestoreDataSource;
   UserModel? _user;
 
-  Future<Result<bool>> _isUserExists(String uid) async {
+  Future<Result<bool>> isUserExists(String uid) async {
     final DocumentReference userDoc = _firestoreDataSource.getDoc(
       path: FirestorePath.userCollection,
       docId: uid,
@@ -32,25 +32,27 @@ class UserRepository {
   }
 
   Future<Result<void>> setUserData(UserModel user) async {
-    final DocumentReference userDocRef = _firestoreDataSource.getDoc(
-      path: FirestorePath.userCollection,
-      docId: user.id,
-    );
-
     /// 사용자 데이터가 FireStore에 존재하는지 확인
-    final Result<bool> userExists = await _isUserExists(user.id);
+    final Result<bool> userExists = await isUserExists(user.id);
 
     try {
       /// 사용자 데이터가 존재하면 업데이트, 존재하지 않으면 추가
       if (userExists is Ok<bool> && userExists.value) {
         await _firestoreDataSource.setData(
-          path: userDocRef.path,
+          path: FirestorePath.userCollection,
           args: user.toJson(),
         );
       } else {
         await _firestoreDataSource.addData(
-          path: userDocRef.path,
-          args: user.toJson(),
+          collectionPath: FirestorePath.userCollection,
+          docId: user.id,
+          args:
+              user
+                  .copyWith(
+                    createdAt: DateTime.now(),
+                    updatedAt: DateTime.now(),
+                  )
+                  .toJson(),
         );
       }
     } catch (e) {
@@ -76,13 +78,7 @@ class UserRepository {
 
   Future<Result<UserModel>> getUser(String userId) async {
     if (_user != null) return Result.ok(_user!);
-    List<String>? favoriteGenres = _sharedPrefUtil.getStringList(
-      SharedPrefKey.favoriteGenre,
-    );
 
-    if (favoriteGenres == null || favoriteGenres.isEmpty) {
-      favoriteGenres = [];
-    }
     try {
       final DocumentReference userDocRef = _firestoreDataSource.getDoc(
         path: FirestorePath.userCollection,
