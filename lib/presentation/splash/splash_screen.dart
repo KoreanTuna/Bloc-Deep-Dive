@@ -6,7 +6,6 @@ import 'package:door_stamp/common/extension/context_extension.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
 import 'package:door_stamp/presentation/widget/image_widget.dart';
 import 'package:door_stamp/router/router_path.dart';
-import 'package:door_stamp/util/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,17 +21,14 @@ class SplashScreen extends BaseScreen {
       () {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           final state = context.read<AuthenticationBloc>().state;
-          FirebaseAuth.instance.authStateChanges().listen((User? user) {
-            /// Firebase Auth가 유효하지 않거나, 상태가 인증되지 않은 경우
-            if (user == null ||
-                state.status != AuthenticationStatus.authenticated) {
-              logger.w('사용자 인증 상태가 유효하지 않음: ${state.status}');
-              context.goNamed(RouterPath.login);
-            } else {
-              /// Firebase Auth가 유효하고, 상태가 인증된 경우
-              context.read<UserBloc>().add(UserDataRequested(userId: user.uid));
-            }
-          });
+          if (state.status == AuthenticationStatus.unauthenticated) {
+            context.goNamed(RouterPath.login);
+          } else if (state.status == AuthenticationStatus.authenticated) {
+            final String userId = FirebaseAuth.instance.currentUser!.uid;
+            context.read<UserBloc>().add(
+              UserDataRequested(userId: userId),
+            );
+          }
         });
         return null;
       },
@@ -40,9 +36,10 @@ class SplashScreen extends BaseScreen {
     );
 
     return BlocListener<UserBloc, UserState>(
-      listenWhen:
-          (previous, current) =>
-              previous is! UserLoaded && current is UserLoaded,
+      listenWhen: (previous, current) {
+        /// UserState가 UserLoaded 상태일 때만 리스너를 실행
+        return current is UserLoaded || current is UserError;
+      },
       listener: (context, state) {
         /// 사용자 정보가 로드되었을 때, 즐겨찾기 장르가 없으면 온보딩 화면으로 이동
         if (state is UserLoaded) {

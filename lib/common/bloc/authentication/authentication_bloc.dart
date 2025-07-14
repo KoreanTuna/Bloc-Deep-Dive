@@ -40,7 +40,9 @@ class AuthenticationBloc
             _authenticationNotifier.setStatus(
               AuthenticationStatus.authenticated,
             );
-            emit(const AuthenticationState.authenticated());
+            emit(
+              const AuthenticationState.authenticated(),
+            );
 
           case AuthenticationStatus.unknown:
             _authenticationNotifier.setStatus(AuthenticationStatus.unknown);
