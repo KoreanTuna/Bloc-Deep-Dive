@@ -6,6 +6,7 @@ import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:door_stamp/environment/app_builder.dart';
 import 'package:door_stamp/environment/getIt/getit.dart';
+import 'package:door_stamp/presentation/on_board/data/repository/favorite_genre_repository.dart';
 import 'package:door_stamp/util/local_storage/shared_pref_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,10 +26,12 @@ class MainApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
+          lazy: false,
           create: (_) => AuthenticationRepository(),
           dispose: (repository) => repository.dispose(),
         ),
         RepositoryProvider(
+          lazy: false,
           create:
               (_) => UserRepository(
                 locator<SharedPrefUtil>(),
@@ -37,24 +40,32 @@ class MainApp extends StatelessWidget {
         ),
       ],
 
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            lazy: false,
-            create:
-                (context) => AuthenticationBloc(
-                  authenticationRepository:
-                      context.read<AuthenticationRepository>(),
-                  authenticationNotifier: locator<AuthenticationNotifier>(),
-                )..add(AuthenticationSubscriptionRequested()),
+      child: RepositoryProvider(
+        lazy: false,
+        create:
+            (_) => FavoriteGenreRepository(
+              locator<FirestoreDataSource>(),
+              locator<UserRepository>(),
+            ),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              lazy: false,
+              create:
+                  (context) => AuthenticationBloc(
+                    authenticationRepository:
+                        context.read<AuthenticationRepository>(),
+                    authenticationNotifier: locator<AuthenticationNotifier>(),
+                  )..add(AuthenticationSubscriptionRequested()),
+            ),
+            BlocProvider(
+              create: (context) => UserBloc(context.read<UserRepository>()),
+            ),
+          ],
+          child: MaterialApp.router(
+            routerConfig: locator<GoRouter>(),
+            theme: ThemeData(colorSchemeSeed: Colors.indigo),
           ),
-          BlocProvider(
-            create: (context) => UserBloc(context.read<UserRepository>()),
-          ),
-        ],
-        child: MaterialApp.router(
-          routerConfig: locator<GoRouter>(),
-          theme: ThemeData(colorSchemeSeed: Colors.indigo),
         ),
       ),
     );

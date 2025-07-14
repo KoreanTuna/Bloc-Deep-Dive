@@ -1,6 +1,9 @@
+import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/common/extension/context_extension.dart';
+import 'package:door_stamp/environment/getIt/getit.dart';
 import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/presentation/on_board/data/repository/favorite_genre_repository.dart';
 import 'package:door_stamp/presentation/on_board/presentation/bloc/on_board_bloc.dart';
 import 'package:door_stamp/presentation/on_board/presentation/widget/genre_card.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
@@ -20,7 +23,7 @@ class OnBoardScreen extends BaseScreen {
     return BlocProvider(
       create:
           (_) => OnBoardBloc(
-            context.read<UserRepository>(),
+            context.read<FavoriteGenreRepository>(),
           ),
       child: BlocListener<OnBoardBloc, OnBoardState>(
         listenWhen: (previous, current) {

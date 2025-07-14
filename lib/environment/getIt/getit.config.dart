@@ -12,6 +12,8 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart'
     as _i622;
+import 'package:door_stamp/common/data/repository/user_repository.dart'
+    as _i570;
 import 'package:door_stamp/common/notifier/authentication_notifier.dart'
     as _i660;
 import 'package:door_stamp/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
@@ -73,6 +75,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i703.BoxOfficeRepository>(
       () => _i703.BoxOfficeRepository(gh<_i930.BoxOfficeDataSource>()),
+    );
+    gh.singleton<_i570.UserRepository>(
+      () => _i570.UserRepository(
+        gh<_i851.SharedPrefUtil>(),
+        gh<_i622.FirestoreDataSource>(),
+      ),
     );
     return this;
   }

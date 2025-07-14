@@ -19,6 +19,10 @@ enum FavoriteGenre {
   family,
   sports;
 
+  String get value {
+    return name;
+  }
+
   String get korean {
     switch (this) {
       case FavoriteGenre.action:

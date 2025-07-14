@@ -1,4 +1,3 @@
-import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
 import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:equatable/equatable.dart';

@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:door_stamp/common/constant/firestore/firestore_path.dart';
-import 'package:door_stamp/common/constant/shared_pref_key.dart';
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/models/user_model.dart';
-import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
 import 'package:door_stamp/util/local_storage/shared_pref_util.dart';
 import 'package:door_stamp/util/result.dart';
+import 'package:injectable/injectable.dart';
 
+@singleton
 class UserRepository {
   UserRepository(
     this._sharedPrefUtil,
@@ -62,16 +62,6 @@ class UserRepository {
     return Result.ok(null);
   }
 
-  Future<void> saveFavoriteGenres(List<FavoriteGenre> favoriteGenres) async {
-    if (_user == null) return;
-    _user = _user!.copyWith(favoriteGenres: favoriteGenres);
-
-    await _sharedPrefUtil.setStringList(
-      key: SharedPrefKey.favoriteGenre,
-      value: favoriteGenres.map((e) => e.name).toList(),
-    );
-  }
-
   Future<void> setUser(UserModel user) async {
     _user = user;
   }
@@ -97,5 +87,9 @@ class UserRepository {
     } catch (e) {
       return Result.error(Exception('Failed to get user: $e'));
     }
+  }
+
+  String getCurrentUserId() {
+    return _user?.id ?? '';
   }
 }
