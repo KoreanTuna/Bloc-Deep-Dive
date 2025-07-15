@@ -73,14 +73,11 @@ extension GetItInjectableX on _i174.GetIt {
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
+    gh.singleton<_i570.UserRepository>(
+      () => _i570.UserRepository(gh<_i622.FirestoreDataSource>()),
+    );
     gh.singleton<_i703.BoxOfficeRepository>(
       () => _i703.BoxOfficeRepository(gh<_i930.BoxOfficeDataSource>()),
-    );
-    gh.singleton<_i570.UserRepository>(
-      () => _i570.UserRepository(
-        gh<_i851.SharedPrefUtil>(),
-        gh<_i622.FirestoreDataSource>(),
-      ),
     );
     return this;
   }

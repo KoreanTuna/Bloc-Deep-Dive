@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:door_stamp/common/data/repository/user_repository.dart';
+import 'package:door_stamp/util/logger.dart';
 import 'package:door_stamp/util/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -7,16 +9,27 @@ import 'package:google_sign_in/google_sign_in.dart';
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
-  AuthenticationRepository() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  AuthenticationRepository(this._userRepository) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if (user == null) {
         _controller.add(AuthenticationStatus.unauthenticated);
       } else {
-        _controller.add(AuthenticationStatus.authenticated);
+        final Result<void> result = await _userRepository.getUser(user.uid);
+        result.when(
+          ok: (_) {
+            logger.d('사용자 정보 조회 성공: ${user.uid}');
+            _controller.add(AuthenticationStatus.authenticated);
+          },
+          error: (Exception e) {
+            logger.e('사용자 정보 조회 실패: ${e.toString()}');
+            _controller.add(AuthenticationStatus.unauthenticated);
+          },
+        );
       }
     });
   }
 
+  final UserRepository _userRepository;
   final _controller = StreamController<AuthenticationStatus>();
 
   Future<Result<UserCredential>> signInWithGoogle() async {

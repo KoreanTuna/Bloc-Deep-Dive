@@ -2,6 +2,7 @@ import 'package:door_stamp/common/constant/firestore/firestore_path.dart';
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/util/logger.dart';
 import 'package:door_stamp/util/result.dart';
 
 class FavoriteGenreRepository {
@@ -26,12 +27,23 @@ class FavoriteGenreRepository {
         favoriteGenres.map((genre) => genre.value).toList();
 
     final Result<void> saveResult = await _firestoreDataSource.setData(
-      path: '${FirestorePath.userCollection}/$userId',
+      path: FirestorePath.userCollection,
       args: {
+        'id': userId,
         'favoriteGenres': favoriteGenresData,
       },
     );
 
-    return saveResult;
+    return saveResult.map(
+      ok: (_) {
+        return Result.ok(null);
+      },
+      error: (error) {
+        logger.e(
+          'Error saving favorite genres for user $userId: $error',
+        );
+        return Result.error(error);
+      },
+    );
   }
 }

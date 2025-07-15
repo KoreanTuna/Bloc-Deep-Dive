@@ -4,17 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:door_stamp/common/constant/firestore/firestore_path.dart';
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/models/user_model.dart';
-import 'package:door_stamp/util/local_storage/shared_pref_util.dart';
+
 import 'package:door_stamp/util/result.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
 class UserRepository {
   UserRepository(
-    this._sharedPrefUtil,
     this._firestoreDataSource,
   );
-  final SharedPrefUtil _sharedPrefUtil;
   final FirestoreDataSource _firestoreDataSource;
   UserModel? _user;
 
@@ -60,10 +58,6 @@ class UserRepository {
     }
 
     return Result.ok(null);
-  }
-
-  Future<void> setUser(UserModel user) async {
-    _user = user;
   }
 
   Future<Result<UserModel>> getUser(String userId) async {

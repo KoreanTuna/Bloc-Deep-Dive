@@ -7,7 +7,6 @@ import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:door_stamp/environment/app_builder.dart';
 import 'package:door_stamp/environment/getIt/getit.dart';
 import 'package:door_stamp/presentation/on_board/data/repository/favorite_genre_repository.dart';
-import 'package:door_stamp/util/local_storage/shared_pref_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,16 +26,15 @@ class MainApp extends StatelessWidget {
       providers: [
         RepositoryProvider(
           lazy: false,
-          create: (_) => AuthenticationRepository(),
+          create:
+              (_) => AuthenticationRepository(
+                locator<UserRepository>(),
+              ),
           dispose: (repository) => repository.dispose(),
         ),
         RepositoryProvider(
           lazy: false,
-          create:
-              (_) => UserRepository(
-                locator<SharedPrefUtil>(),
-                locator<FirestoreDataSource>(),
-              ),
+          create: (_) => UserRepository(locator<FirestoreDataSource>()),
         ),
       ],
 
