@@ -28,12 +28,18 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
     movieDetail.when(
       ok:
           (movieDetail) => emit(
-            state.copyWith(
+            MovieDetailState(
               status: MovieDetailStatus.success,
               movieDetail: movieDetail,
             ),
           ),
-      error: (_) => emit(state.copyWith(status: MovieDetailStatus.failure)),
+      error:
+          (_) => emit(
+            MovieDetailState(
+              status: MovieDetailStatus.failure,
+              movieDetail: null,
+            ),
+          ),
     );
   }
 }

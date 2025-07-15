@@ -4,63 +4,79 @@ import 'package:door_stamp/presentation/on_board/data/repository/favorite_genre_
 import 'package:door_stamp/presentation/on_board/presentation/bloc/on_board_bloc.dart';
 import 'package:door_stamp/util/result.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
-class MockFavoriteGenreRepository extends Mock implements FavoriteGenreRepository {}
+import 'on_board_bloc_test.mocks.dart';
+
+@GenerateMocks([
+  FavoriteGenreRepository,
+])
+import 'package:mockito/mockito.dart' as mockito;
 
 void main() {
+  late MockFavoriteGenreRepository repository;
+
+  mockito.provideDummy<Result<void>>(const Result<void>.ok(null));
+
+  setUp(() {
+    repository = MockFavoriteGenreRepository();
+  });
+
   group('OnBoardBloc', () {
-    late FavoriteGenreRepository repository;
-
-    setUp(() {
-      repository = MockFavoriteGenreRepository();
-    });
-
     blocTest<OnBoardBloc, OnBoardState>(
-      '[select] : 장르 선택시 리스트에 추가된다.',
+      'emits updated genres when a genre is selected',
       build: () => OnBoardBloc(repository),
       act: (bloc) => bloc.add(SelectGenreEvent(FavoriteGenre.action)),
-      expect: () => [
-        const OnBoardState(selectedGenres: [FavoriteGenre.action]),
-      ],
+      expect:
+          () => [
+            const OnBoardState(selectedGenres: [FavoriteGenre.action]),
+          ],
     );
 
     blocTest<OnBoardBloc, OnBoardState>(
-      '[deselect] : 장르 선택 해제시 리스트에서 제거된다.',
+      'emits updated genres when a genre is deselected',
       build: () => OnBoardBloc(repository),
       seed: () => const OnBoardState(selectedGenres: [FavoriteGenre.action]),
       act: (bloc) => bloc.add(DeselectGenreEvent(FavoriteGenre.action)),
-      expect: () => [
-        const OnBoardState(selectedGenres: []),
-      ],
+      expect:
+          () => [
+            const OnBoardState(selectedGenres: []),
+          ],
     );
 
     blocTest<OnBoardBloc, OnBoardState>(
-      '[submit success] : 데이터 저장 성공시 isSubmitted가 true가 된다.',
+      'sets isSubmitted true when repository returns success',
       build: () {
-        when(() => repository.saveFavoriteGenres(
-              favoriteGenres: [FavoriteGenre.action],
-            )).thenAnswer((_) async => const Ok(null));
+        when(
+          repository.saveFavoriteGenres(
+            favoriteGenres: [FavoriteGenre.action],
+          ),
+        ).thenAnswer((_) async => const Result<void>.ok(null));
         return OnBoardBloc(repository);
       },
       act: (bloc) => bloc.add(SubmitOnBoardEvent([FavoriteGenre.action])),
-      expect: () => [
-        const OnBoardState(isSubmitted: true),
-      ],
+      expect:
+          () => [
+            const OnBoardState(isSubmitted: true),
+          ],
     );
 
     blocTest<OnBoardBloc, OnBoardState>(
-      '[submit failure] : 데이터 저장 실패시 isSubmitted가 false가 된다.',
+      'keeps isSubmitted false when repository returns failure',
       build: () {
-        when(() => repository.saveFavoriteGenres(
-              favoriteGenres: [FavoriteGenre.action],
-            )).thenAnswer((_) async => Result.error(Exception('error')));
+        when(
+          repository.saveFavoriteGenres(
+            favoriteGenres: [FavoriteGenre.action],
+          ),
+        ).thenAnswer((_) async => Result.error(Exception('fail')));
         return OnBoardBloc(repository);
       },
       act: (bloc) => bloc.add(SubmitOnBoardEvent([FavoriteGenre.action])),
-      expect: () => [
-        const OnBoardState(isSubmitted: false),
-      ],
+      expect:
+          () => [
+            const OnBoardState(isSubmitted: false),
+          ],
     );
   });
 }
