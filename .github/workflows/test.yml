@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  test:
+  flutter_tests:
+    name: Flutter Tests # 이 이름이 보호 브랜치 체크로 쓰임
     runs-on: ubuntu-latest
 
     steps:
