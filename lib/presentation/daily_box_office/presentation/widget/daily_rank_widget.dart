@@ -4,7 +4,6 @@ import 'package:door_stamp/presentation/widget/image_widget.dart';
 import 'package:door_stamp/theme/color_style.dart';
 import 'package:door_stamp/theme/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 enum DailyRankType {
