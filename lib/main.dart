@@ -34,7 +34,7 @@ class MainApp extends StatelessWidget {
         ),
         RepositoryProvider(
           lazy: false,
-          create: (_) => UserRepository(locator<FirestoreDataSource>()),
+          create: (_) => locator<UserRepository>(),
         ),
       ],
 
