@@ -33,6 +33,7 @@ dependencies:
   json_annotation: ^4.9.0
   logger: ^2.6.0
   mockito: ^5.4.6
+  mocktail: ^1.0.4
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.4.2
   retrofit_generator: ^9.2.0
