@@ -6,16 +6,12 @@
 import 'dart:async' as _i4;
 
 import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart'
-    as _i7;
+    as _i3;
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart'
     as _i2;
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_request_model.dart'
-    as _i8;
-import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart'
-    as _i3;
-import 'package:door_stamp/util/result.dart' as _i5;
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -37,53 +33,18 @@ class _FakeBoxOfficeResponseModel_0 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [BoxOfficeRepository].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockBoxOfficeRepository extends _i1.Mock
-    implements _i3.BoxOfficeRepository {
-  MockBoxOfficeRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<_i5.Result<_i2.DailyBoxOfficeModel>> getDailyBoxOffice({
-    required String? targetDt,
-    String? itemPerPage,
-    bool? isRefresh = false,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#getDailyBoxOffice, [], {
-              #targetDt: targetDt,
-              #itemPerPage: itemPerPage,
-              #isRefresh: isRefresh,
-            }),
-            returnValue: _i4.Future<_i5.Result<_i2.DailyBoxOfficeModel>>.value(
-              _i6.dummyValue<_i5.Result<_i2.DailyBoxOfficeModel>>(
-                this,
-                Invocation.method(#getDailyBoxOffice, [], {
-                  #targetDt: targetDt,
-                  #itemPerPage: itemPerPage,
-                  #isRefresh: isRefresh,
-                }),
-              ),
-            ),
-          )
-          as _i4.Future<_i5.Result<_i2.DailyBoxOfficeModel>>);
-}
-
 /// A class which mocks [BoxOfficeDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBoxOfficeDataSource extends _i1.Mock
-    implements _i7.BoxOfficeDataSource {
+    implements _i3.BoxOfficeDataSource {
   MockBoxOfficeDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   _i4.Future<_i2.BoxOfficeResponseModel> getDailyBoxOffice(
-    _i8.DailyBoxOfficeRequestModel? dailyBoxOfficeRequestModel,
+    _i5.DailyBoxOfficeRequestModel? dailyBoxOfficeRequestModel,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#getDailyBoxOffice, [dailyBoxOfficeRequestModel]),

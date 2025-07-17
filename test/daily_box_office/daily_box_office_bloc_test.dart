@@ -1,8 +1,11 @@
+import 'package:door_stamp/environment/api_config.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart';
+import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_request_model.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/presentation/bloc/daily_box_office_bloc.dart';
 import 'package:door_stamp/util/result.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,17 +13,22 @@ import 'package:bloc_test/bloc_test.dart';
 
 import 'daily_box_office_bloc_test.mocks.dart';
 
-@GenerateMocks([
-  BoxOfficeRepository,
-  BoxOfficeDataSource,
-])
-void main() {
-  late MockBoxOfficeRepository repository;
+@GenerateMocks([BoxOfficeDataSource])
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  late BoxOfficeRepository repository;
   late MockBoxOfficeDataSource dataSource;
 
   setUp(() {
-    repository = MockBoxOfficeRepository();
     dataSource = MockBoxOfficeDataSource();
+    repository = BoxOfficeRepository(dataSource);
+
+    dotenv.testLoad(
+      fileInput: '''
+          API_KEY=TEST_API_KEY
+      ''',
+    );
   });
 
   provideDummy<Result<DailyBoxOfficeModel>>(
@@ -50,11 +58,16 @@ void main() {
       '[success] : 데이터가 정상적으로 로드되면 Status가 success로 변경되고, 영화목록이 정렬되어 제공된다.',
       build: () {
         when(
-          repository.getDailyBoxOffice(
-            targetDt: targetDate,
-            itemPerPage: '10',
+          dataSource.getDailyBoxOffice(
+            DailyBoxOfficeRequestModel(
+              targetDt: targetDate,
+              itemPerPage: '10',
+              key: ApiConfig.apiKey,
+            ),
           ),
-        ).thenAnswer((_) async => Result.ok(boxOfficeModel));
+        ).thenAnswer(
+          (_) async => BoxOfficeResponseModel(boxOfficeResult: boxOfficeModel),
+        );
 
         return DailyBoxOfficeBloc(boxOfficeRepository: repository);
       },
@@ -74,16 +87,38 @@ void main() {
 
     test('[success] 캐시 생성 이후 데이터 fetching를 하지 않는지 테스트', () async {
       when(
-        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
-      ).thenAnswer((_) async => Result.ok(boxOfficeModel));
+        dataSource.getDailyBoxOffice(
+          DailyBoxOfficeRequestModel(
+            targetDt: targetDate,
+            itemPerPage: '10',
+            key: ApiConfig.apiKey,
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => BoxOfficeResponseModel(boxOfficeResult: boxOfficeModel),
+      );
 
-      final result1 = await repository.getDailyBoxOffice(targetDt: '20250714');
+      final result1 = await repository.getDailyBoxOffice(
+        targetDt: targetDate,
+        itemPerPage: '10',
+      );
+
       expect(result1 is Ok<DailyBoxOfficeModel>, true);
       verify(
-        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
+        dataSource.getDailyBoxOffice(
+          DailyBoxOfficeRequestModel(
+            targetDt: targetDate,
+            itemPerPage: '10',
+            key: ApiConfig.apiKey,
+          ),
+        ),
       ).called(1);
 
-      final result2 = await repository.getDailyBoxOffice(targetDt: '20250714');
+      final result2 = await repository.getDailyBoxOffice(
+        targetDt: targetDate,
+        itemPerPage: '10',
+      );
+
       expect(result2 is Ok<DailyBoxOfficeModel>, true);
       verifyNever(
         dataSource.getDailyBoxOffice(any),
@@ -92,37 +127,56 @@ void main() {
 
     test('[success] 캐시 생성 이후 refresh로 데이터 fetching을 하는지 테스트', () async {
       when(
-        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
-      ).thenAnswer((_) async => Result.ok(boxOfficeModel));
+        dataSource.getDailyBoxOffice(
+          DailyBoxOfficeRequestModel(
+            targetDt: targetDate,
+            itemPerPage: '10',
+            key: ApiConfig.apiKey,
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => BoxOfficeResponseModel(boxOfficeResult: boxOfficeModel),
+      );
 
       final result1 = await repository.getDailyBoxOffice(
-        targetDt: '20250714',
-        isRefresh: true,
+        targetDt: targetDate,
+        itemPerPage: '10',
+        isRefresh: false,
       );
       expect(result1 is Ok<DailyBoxOfficeModel>, true);
-      verify(
-        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
-      ).called(1);
 
       final result2 = await repository.getDailyBoxOffice(
-        targetDt: '20250714',
+        targetDt: targetDate,
+        itemPerPage: '10',
         isRefresh: true,
       );
+
       expect(result2 is Ok<DailyBoxOfficeModel>, true);
       verify(
-        dataSource.getDailyBoxOffice(any),
-      ).called(1);
+        dataSource.getDailyBoxOffice(
+          DailyBoxOfficeRequestModel(
+            targetDt: targetDate,
+            itemPerPage: '10',
+            key: ApiConfig.apiKey,
+          ),
+        ),
+      ).called(2);
     });
 
     blocTest(
       '[failure] : 데이터 로드에 실패하면 Status가 failure로 변경된다.',
       build: () {
         when(
-          repository.getDailyBoxOffice(
-            targetDt: targetDate,
-            itemPerPage: '10',
+          dataSource.getDailyBoxOffice(
+            DailyBoxOfficeRequestModel(
+              targetDt: targetDate,
+              itemPerPage: '10',
+              key: ApiConfig.apiKey,
+            ),
           ),
-        ).thenAnswer((_) async => Result.error(Exception('Error')));
+        ).thenAnswer(
+          (_) async => throw Exception('Failed to load data'),
+        );
 
         return DailyBoxOfficeBloc(boxOfficeRepository: repository);
       },
