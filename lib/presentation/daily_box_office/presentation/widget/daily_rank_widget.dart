@@ -35,10 +35,11 @@ class DailyRankWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 12,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(dailyBoxOfficeMovieList.length, (index) {
+    return ListView.separated(
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      itemCount: dailyBoxOfficeMovieList.length,
+      itemBuilder: (context, index) {
         if (index < 3) {
           return _RankWidget(
             key: ValueKey(dailyBoxOfficeMovieList[index].movieCd),
@@ -53,7 +54,13 @@ class DailyRankWidget extends HookWidget {
           dailyBoxOfficeMovie: dailyBoxOfficeMovieList[index],
           onMovieSelected: onMovieSelected,
         );
-      }),
+      },
+      separatorBuilder: (context, index) {
+        if (index < dailyBoxOfficeMovieList.length - 1) {
+          return Padding(padding: const EdgeInsets.symmetric(vertical: 6));
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

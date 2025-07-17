@@ -5,6 +5,9 @@ import 'package:door_stamp/presentation/home/home_screen.dart';
 import 'package:door_stamp/presentation/login/login_screen.dart';
 import 'package:door_stamp/presentation/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:door_stamp/presentation/on_board/presentation/on_board_screen.dart';
+import 'package:door_stamp/presentation/profile/presentation/profile_screen.dart';
+import 'package:door_stamp/presentation/search/presentation/search_screen.dart';
+import 'package:door_stamp/presentation/shell/presentation/shell_screen.dart';
 import 'package:door_stamp/presentation/splash/splash_screen.dart';
 import 'package:door_stamp/router/router_observer.dart';
 import 'package:door_stamp/router/router_path.dart';
@@ -14,6 +17,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
 
 Widget _fadeTransition(
   BuildContext context,
@@ -93,21 +97,50 @@ abstract class GoRouterModule {
             name: RouterPath.onboard,
             builder: (context, state) => const OnBoardScreen(),
             pageBuilder:
-                (context, state) => buildFadeTransitionPage(
-                  state: state,
+                (context, state) => NoTransitionPage(
                   child: const OnBoardScreen(),
                 ),
           ),
-          GoRoute(
-            path: RouterPath.home,
-            name: RouterPath.home,
-            builder: (context, state) => const HomeScreen(),
-            pageBuilder:
-                (context, state) => buildFadeTransitionPage(
-                  state: state,
-                  child: const HomeScreen(),
-                ),
+          ShellRoute(
+            navigatorKey: shellNavigatorKey,
+            builder: (context, state, child) {
+              return ShellScreen(
+                state: state,
+                child: child,
+              );
+            },
+            routes: [
+              GoRoute(
+                path: RouterPath.home,
+                name: RouterPath.home,
+                builder: (context, state) => const HomeScreen(),
+                pageBuilder:
+                    (context, state) => NoTransitionPage(
+                      child: const HomeScreen(),
+                    ),
+              ),
+              GoRoute(
+                path: RouterPath.search,
+                name: RouterPath.search,
+                builder: (context, state) => const SearchScreen(),
+                pageBuilder:
+                    (context, state) => NoTransitionPage(
+                      child: const SearchScreen(),
+                    ),
+              ),
+              GoRoute(
+                path: RouterPath.profile,
+                name: RouterPath.profile,
+                builder: (context, state) => const ProfileScreen(),
+                pageBuilder:
+                    (context, state) => buildFadeTransitionPage(
+                      state: state,
+                      child: const ProfileScreen(),
+                    ),
+              ),
+            ],
           ),
+
           GoRoute(
             path: '${RouterPath.movieDetail}/:movieCd/:prevDayTotalAudits',
             name: RouterPath.movieDetail,
