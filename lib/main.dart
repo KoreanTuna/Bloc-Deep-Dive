@@ -7,6 +7,7 @@ import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:door_stamp/environment/app_builder.dart';
 import 'package:door_stamp/environment/getIt/getit.dart';
 import 'package:door_stamp/presentation/on_board/data/repository/favorite_genre_repository.dart';
+import 'package:door_stamp/presentation/shell/presentation/bloc/bottom_nav_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -55,6 +56,9 @@ class MainApp extends StatelessWidget {
                         context.read<AuthenticationRepository>(),
                     authenticationNotifier: locator<AuthenticationNotifier>(),
                   )..add(AuthenticationSubscriptionRequested()),
+            ),
+            BlocProvider(
+              create: (context) => BottomNavCubit(),
             ),
             BlocProvider(
               create: (context) => UserBloc(context.read<UserRepository>()),

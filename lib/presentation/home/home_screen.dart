@@ -14,6 +14,8 @@ import 'package:go_router/go_router.dart';
 
 class HomeScreen extends BaseScreen {
   const HomeScreen({super.key});
+  @override
+  bool get setBottomSafeArea => false;
 
   @override
   Widget buildScreen(BuildContext context) {
@@ -36,18 +38,26 @@ class HomeScreen extends BaseScreen {
           } else if (state.status == DailyBoxOfficeStatus.failure) {
             return const Center(child: Text('Failed to fetch data'));
           } else {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  HomeTitle(),
-                  Divider(
-                    color: ColorStyle.coolGray300,
-                    thickness: 0.5,
-                    height: 32,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      HomeTitle(),
+                      Divider(
+                        color: ColorStyle.coolGray300,
+                        thickness: 0.5,
+                        height: 32,
+                      ),
+                    ],
                   ),
-                  DailyRankWidget(
+                ),
+
+                Expanded(
+                  child: DailyRankWidget(
                     dailyBoxOfficeMovieList: state.boxOffices,
                     onMovieSelected:
                         (movieCd) => context.pushNamed(
@@ -64,8 +74,8 @@ class HomeScreen extends BaseScreen {
                           },
                         ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }
         },
