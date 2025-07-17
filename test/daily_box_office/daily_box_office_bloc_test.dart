@@ -1,3 +1,4 @@
+import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/presentation/bloc/daily_box_office_bloc.dart';
@@ -11,15 +12,17 @@ import 'daily_box_office_bloc_test.mocks.dart';
 
 @GenerateMocks([
   BoxOfficeRepository,
+  BoxOfficeDataSource,
 ])
 void main() {
   late MockBoxOfficeRepository repository;
+  late MockBoxOfficeDataSource dataSource;
 
   setUp(() {
     repository = MockBoxOfficeRepository();
+    dataSource = MockBoxOfficeDataSource();
   });
 
-  // Provide a dummy value for Result<DailyBoxOfficeModel> to satisfy Mockito
   provideDummy<Result<DailyBoxOfficeModel>>(
     Result.ok(
       const DailyBoxOfficeModel(
@@ -68,6 +71,48 @@ void main() {
             ),
           ],
     );
+
+    test('[success] 캐시 생성 이후 데이터 fetching를 하지 않는지 테스트', () async {
+      when(
+        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
+      ).thenAnswer((_) async => Result.ok(boxOfficeModel));
+
+      final result1 = await repository.getDailyBoxOffice(targetDt: '20250714');
+      expect(result1 is Ok<DailyBoxOfficeModel>, true);
+      verify(
+        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
+      ).called(1);
+
+      final result2 = await repository.getDailyBoxOffice(targetDt: '20250714');
+      expect(result2 is Ok<DailyBoxOfficeModel>, true);
+      verifyNever(
+        dataSource.getDailyBoxOffice(any),
+      );
+    });
+
+    test('[success] 캐시 생성 이후 refresh로 데이터 fetching을 하는지 테스트', () async {
+      when(
+        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
+      ).thenAnswer((_) async => Result.ok(boxOfficeModel));
+
+      final result1 = await repository.getDailyBoxOffice(
+        targetDt: '20250714',
+        isRefresh: true,
+      );
+      expect(result1 is Ok<DailyBoxOfficeModel>, true);
+      verify(
+        repository.getDailyBoxOffice(targetDt: any, itemPerPage: any),
+      ).called(1);
+
+      final result2 = await repository.getDailyBoxOffice(
+        targetDt: '20250714',
+        isRefresh: true,
+      );
+      expect(result2 is Ok<DailyBoxOfficeModel>, true);
+      verify(
+        dataSource.getDailyBoxOffice(any),
+      ).called(1);
+    });
 
     blocTest(
       '[failure] : 데이터 로드에 실패하면 Status가 failure로 변경된다.',
