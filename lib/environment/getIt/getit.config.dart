@@ -16,13 +16,13 @@ import 'package:door_stamp/common/data/repository/user_repository.dart'
     as _i570;
 import 'package:door_stamp/common/notifier/authentication_notifier.dart'
     as _i660;
-import 'package:door_stamp/presentation/daily_box_office/data/data_source/box_office_data_source.dart'
+import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart'
     as _i930;
-import 'package:door_stamp/presentation/daily_box_office/data/repository/box_office_repository.dart'
+import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart'
     as _i703;
-import 'package:door_stamp/presentation/movie_detail/data/data_source/movie_detail_data_source.dart'
+import 'package:door_stamp/presentation/screens/movie_detail/data/data_source/movie_detail_data_source.dart'
     as _i1027;
-import 'package:door_stamp/presentation/movie_detail/data/repository/movie_detail_repository.dart'
+import 'package:door_stamp/presentation/screens/movie_detail/data/repository/movie_detail_repository.dart'
     as _i318;
 import 'package:door_stamp/router/router.dart' as _i498;
 import 'package:door_stamp/router/router_observer.dart' as _i676;
