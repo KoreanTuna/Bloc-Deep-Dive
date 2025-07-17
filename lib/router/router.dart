@@ -133,8 +133,7 @@ abstract class GoRouterModule {
                 name: RouterPath.profile,
                 builder: (context, state) => const ProfileScreen(),
                 pageBuilder:
-                    (context, state) => buildFadeTransitionPage(
-                      state: state,
+                    (context, state) => NoTransitionPage(
                       child: const ProfileScreen(),
                     ),
               ),

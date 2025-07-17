@@ -3,15 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
+import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart'
+    as _i3;
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart'
-    as _i5;
-import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart'
     as _i2;
-import 'package:door_stamp/util/result.dart' as _i4;
+import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_request_model.dart'
+    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,34 +27,35 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [BoxOfficeRepository].
+class _FakeBoxOfficeResponseModel_0 extends _i1.SmartFake
+    implements _i2.BoxOfficeResponseModel {
+  _FakeBoxOfficeResponseModel_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+/// A class which mocks [BoxOfficeDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBoxOfficeRepository extends _i1.Mock
-    implements _i2.BoxOfficeRepository {
-  MockBoxOfficeRepository() {
+class MockBoxOfficeDataSource extends _i1.Mock
+    implements _i3.BoxOfficeDataSource {
+  MockBoxOfficeDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<_i4.Result<_i5.DailyBoxOfficeModel>> getDailyBoxOffice({
-    required String? targetDt,
-    String? itemPerPage,
-  }) =>
+  _i4.Future<_i2.BoxOfficeResponseModel> getDailyBoxOffice(
+    _i5.DailyBoxOfficeRequestModel? dailyBoxOfficeRequestModel,
+  ) =>
       (super.noSuchMethod(
-            Invocation.method(#getDailyBoxOffice, [], {
-              #targetDt: targetDt,
-              #itemPerPage: itemPerPage,
-            }),
-            returnValue: _i3.Future<_i4.Result<_i5.DailyBoxOfficeModel>>.value(
-              _i6.dummyValue<_i4.Result<_i5.DailyBoxOfficeModel>>(
+            Invocation.method(#getDailyBoxOffice, [dailyBoxOfficeRequestModel]),
+            returnValue: _i4.Future<_i2.BoxOfficeResponseModel>.value(
+              _FakeBoxOfficeResponseModel_0(
                 this,
-                Invocation.method(#getDailyBoxOffice, [], {
-                  #targetDt: targetDt,
-                  #itemPerPage: itemPerPage,
-                }),
+                Invocation.method(#getDailyBoxOffice, [
+                  dailyBoxOfficeRequestModel,
+                ]),
               ),
             ),
           )
-          as _i3.Future<_i4.Result<_i5.DailyBoxOfficeModel>>);
+          as _i4.Future<_i2.BoxOfficeResponseModel>);
 }
