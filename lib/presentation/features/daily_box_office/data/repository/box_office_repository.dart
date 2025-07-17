@@ -10,10 +10,17 @@ class BoxOfficeRepository {
   BoxOfficeRepository(this._boxOfficeDataSource);
   final BoxOfficeDataSource _boxOfficeDataSource;
 
+  DailyBoxOfficeModel? _cachedBoxOfficeModel;
+
   Future<Result<DailyBoxOfficeModel>> getDailyBoxOffice({
     required String targetDt,
     String? itemPerPage,
+    bool isRefresh = false,
   }) async {
+    if (!isRefresh && _cachedBoxOfficeModel != null) {
+      return Result.ok(_cachedBoxOfficeModel!);
+    }
+
     try {
       final BoxOfficeResponseModel response = await _boxOfficeDataSource
           .getDailyBoxOffice(
@@ -24,6 +31,7 @@ class BoxOfficeRepository {
             ),
           );
 
+      _cachedBoxOfficeModel = response.boxOfficeResult;
       return Result.ok(response.boxOfficeResult);
     } catch (e) {
       return Result.error(

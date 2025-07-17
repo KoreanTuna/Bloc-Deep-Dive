@@ -17,13 +17,13 @@ import 'package:door_stamp/common/data/repository/user_repository.dart'
 import 'package:door_stamp/common/notifier/authentication_notifier.dart'
     as _i660;
 import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart'
-    as _i930;
+    as _i1064;
 import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart'
-    as _i703;
+    as _i62;
 import 'package:door_stamp/presentation/screens/movie_detail/data/data_source/movie_detail_data_source.dart'
-    as _i1027;
+    as _i1036;
 import 'package:door_stamp/presentation/screens/movie_detail/data/repository/movie_detail_repository.dart'
-    as _i318;
+    as _i1050;
 import 'package:door_stamp/router/router.dart' as _i498;
 import 'package:door_stamp/router/router_observer.dart' as _i676;
 import 'package:door_stamp/util/dio.dart' as _i681;
@@ -56,28 +56,28 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
     gh.singleton<_i622.FirestoreDataSource>(() => _i622.FirestoreDataSource());
     gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
-    gh.lazySingleton<_i930.BoxOfficeDataSource>(
+    gh.lazySingleton<_i1064.BoxOfficeDataSource>(
       () =>
           boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
     );
-    gh.lazySingleton<_i1027.MovieDetailDataSource>(
+    gh.lazySingleton<_i1036.MovieDetailDataSource>(
       () => movieDetailDataSourceModule.provideMovieDetailDataSource(
         gh<_i361.Dio>(),
       ),
-    );
-    gh.lazySingleton<_i318.MovieDetailRepository>(
-      () => _i318.MovieDetailRepository(gh<_i1027.MovieDetailDataSource>()),
     );
     gh.singleton<_i851.SharedPrefUtil>(
       () => _i851.SharedPrefUtil(
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
+    gh.singleton<_i62.BoxOfficeRepository>(
+      () => _i62.BoxOfficeRepository(gh<_i1064.BoxOfficeDataSource>()),
+    );
     gh.singleton<_i570.UserRepository>(
       () => _i570.UserRepository(gh<_i622.FirestoreDataSource>()),
     );
-    gh.singleton<_i703.BoxOfficeRepository>(
-      () => _i703.BoxOfficeRepository(gh<_i930.BoxOfficeDataSource>()),
+    gh.lazySingleton<_i1050.MovieDetailRepository>(
+      () => _i1050.MovieDetailRepository(gh<_i1036.MovieDetailDataSource>()),
     );
     return this;
   }
@@ -89,7 +89,7 @@ class _$DioModule extends _i681.DioModule {}
 
 class _$GoRouterModule extends _i498.GoRouterModule {}
 
-class _$BoxOfficeDataSourceModule extends _i930.BoxOfficeDataSourceModule {}
+class _$BoxOfficeDataSourceModule extends _i1064.BoxOfficeDataSourceModule {}
 
 class _$MovieDetailDataSourceModule
-    extends _i1027.MovieDetailDataSourceModule {}
+    extends _i1036.MovieDetailDataSourceModule {}

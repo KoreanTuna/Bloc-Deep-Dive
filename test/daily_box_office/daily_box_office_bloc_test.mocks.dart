@@ -40,11 +40,13 @@ class MockBoxOfficeRepository extends _i1.Mock
   _i3.Future<_i4.Result<_i5.DailyBoxOfficeModel>> getDailyBoxOffice({
     required String? targetDt,
     String? itemPerPage,
+    bool? isRefresh = false,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#getDailyBoxOffice, [], {
               #targetDt: targetDt,
               #itemPerPage: itemPerPage,
+              #isRefresh: isRefresh,
             }),
             returnValue: _i3.Future<_i4.Result<_i5.DailyBoxOfficeModel>>.value(
               _i6.dummyValue<_i4.Result<_i5.DailyBoxOfficeModel>>(
@@ -52,6 +54,7 @@ class MockBoxOfficeRepository extends _i1.Mock
                 Invocation.method(#getDailyBoxOffice, [], {
                   #targetDt: targetDt,
                   #itemPerPage: itemPerPage,
+                  #isRefresh: isRefresh,
                 }),
               ),
             ),
