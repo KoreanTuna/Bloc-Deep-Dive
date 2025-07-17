@@ -1,5 +1,5 @@
-import 'package:door_stamp/presentation/login/bloc/login_bloc.dart';
-import 'package:door_stamp/presentation/on_board/data/models/favorite_genre_model.dart';
+import 'package:door_stamp/presentation/screens/login/bloc/login_bloc.dart';
+import 'package:door_stamp/presentation/screens/on_board/data/models/favorite_genre_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_model.g.dart';

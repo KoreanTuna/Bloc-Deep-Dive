@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
-import 'package:door_stamp/presentation/login/bloc/login_bloc.dart';
+import 'package:door_stamp/presentation/screens/login/bloc/login_bloc.dart';
 import 'package:door_stamp/util/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';

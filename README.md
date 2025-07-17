@@ -89,7 +89,7 @@ OnBoardState : FavoriteGenre Enum 리스트를 상태로 갖는다.
 </br>
 
 장르카드는 BlocSelector를 통해 현재 선택되어있는지 아닌에 따라 Select, DeSelect Event를 분기처리
-[코드 파일](https://github.com/KoreanTuna/Bloc-Deep-Dive/blob/main/lib/presentation/on_board/presentation/on_board_screen.dart)
+[코드 파일](https://github.com/KoreanTuna/Bloc-Deep-Dive/blob/main/lib/presentation/screens/on_board/presentation/on_board_screen.dart)
 
 ``` dart
 return BlocSelector<OnBoardBloc, OnBoardState, bool>(

@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:door_stamp/presentation/daily_box_office/data/models/daily_box_office_model.dart'
+import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart'
     as _i5;
-import 'package:door_stamp/presentation/daily_box_office/data/repository/box_office_repository.dart'
+import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart'
     as _i2;
 import 'package:door_stamp/util/result.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
