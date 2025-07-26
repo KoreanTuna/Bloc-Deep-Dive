@@ -1,11 +1,12 @@
 import 'package:door_stamp/presentation/screens/shell/presentation/bloc/bottom_nav_cubit.dart';
 import 'package:door_stamp/presentation/screens/shell/presentation/widget/bottom_nav_widget.dart';
+import 'package:door_stamp/presentation/widget/base/base_screen.dart';
 import 'package:door_stamp/router/router_path.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ShellScreen extends StatelessWidget {
+class ShellScreen extends BaseScreen {
   const ShellScreen({
     super.key,
     required this.state,
@@ -16,7 +17,13 @@ class ShellScreen extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  bool get setTopSafeArea => false;
+
+  @override
+  bool get setBottomSafeArea => false;
+
+  @override
+  Widget buildScreen(BuildContext context) {
     final bottomNavCubit = context.watch<BottomNavCubit>();
     return BlocProvider(
       create: (_) => BottomNavCubit(),
