@@ -3,7 +3,7 @@ import 'package:door_stamp/common/extension/date_time_extension.dart';
 import 'package:door_stamp/environment/getIt/getit.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/presentation/bloc/daily_box_office_bloc.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/presentation/widget/daily_rank_widget.dart';
-import 'package:door_stamp/presentation/screens/shell/home/widget/home_title.dart';
+import 'package:door_stamp/presentation/screens/shell/screen/home/widget/home_title.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
 import 'package:door_stamp/router/router_path.dart';
 import 'package:door_stamp/theme/color_style.dart';

@@ -1,13 +1,13 @@
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
 import 'package:door_stamp/common/notifier/authentication_notifier.dart';
 import 'package:door_stamp/environment/getIt/getit.dart';
-import 'package:door_stamp/presentation/screens/shell/home/home_screen.dart';
 import 'package:door_stamp/presentation/screens/login/login_screen.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:door_stamp/presentation/screens/on_board/presentation/on_board_screen.dart';
-import 'package:door_stamp/presentation/screens/shell/profile/presentation/profile_screen.dart';
-import 'package:door_stamp/presentation/screens/shell/search/presentation/search_screen.dart';
 import 'package:door_stamp/presentation/screens/shell/presentation/shell_screen.dart';
+import 'package:door_stamp/presentation/screens/shell/screen/home/home_screen.dart';
+import 'package:door_stamp/presentation/screens/shell/screen/profile/presentation/profile_screen.dart';
+import 'package:door_stamp/presentation/screens/shell/screen/search/presentation/search_screen.dart';
 import 'package:door_stamp/presentation/screens/splash/splash_screen.dart';
 import 'package:door_stamp/router/router_observer.dart';
 import 'package:door_stamp/router/router_path.dart';

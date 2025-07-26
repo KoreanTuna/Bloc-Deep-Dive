@@ -37,18 +37,25 @@ class SplashScreen extends BaseScreen {
         }
       },
       child: BlocListener<UserBloc, UserState>(
-        listenWhen: (previous, current) {
-          /// UserState가 UserLoaded 상태일 때만 리스너를 실행
-          return current is UserLoaded || current is UserError;
-        },
         listener: (context, state) {
+          if (state is UserLoading) {
+            logger.i('사용자 정보 로드 중...');
+            return;
+          } else if (state is UserError) {
+            logger.e('사용자 정보 로드 실패: ${state.message}');
+            context.goNamed(RouterPath.login);
+            return;
+          }
+
           /// 사용자 정보가 로드되었을 때, 즐겨찾기 장르가 없으면 온보딩 화면으로 이동
           if (state is UserLoaded) {
             if (state.user.favoriteGenres == null ||
                 state.user.favoriteGenres!.isEmpty) {
+              logger.i('즐겨찾기 장르가 없습니다. 온보딩 화면으로 이동합니다.');
               context.goNamed(RouterPath.onboard);
               return;
             } else {
+              logger.i('사용자 정보 로드 완료: ${state.user.name}');
               context.goNamed(RouterPath.home);
             }
           } else {
