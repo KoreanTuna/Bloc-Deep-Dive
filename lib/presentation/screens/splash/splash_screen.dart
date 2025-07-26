@@ -15,6 +15,21 @@ import 'package:go_router/go_router.dart';
 
 class SplashScreen extends BaseScreen {
   const SplashScreen({super.key});
+
+  @override
+  void onInit(BuildContext context) {
+    super.onInit(context);
+
+    final AuthenticationStatus status =
+        context.read<AuthenticationBloc>().state.status;
+
+    if (status == AuthenticationStatus.unauthenticated) {
+      context.goNamed(RouterPath.login);
+    } else if (status == AuthenticationStatus.authenticated) {
+      final String userId = FirebaseAuth.instance.currentUser!.uid;
+      context.read<UserBloc>().add(UserDataRequested(userId: userId));
+    }
+  }
   @override
   Widget buildScreen(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
