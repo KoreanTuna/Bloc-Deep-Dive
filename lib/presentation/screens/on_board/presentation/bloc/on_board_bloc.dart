@@ -1,6 +1,6 @@
 import 'package:door_stamp/presentation/screens/on_board/data/models/favorite_genre_model.dart';
 import 'package:door_stamp/presentation/screens/on_board/data/repository/favorite_genre_repository.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

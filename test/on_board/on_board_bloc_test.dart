@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:door_stamp/presentation/screens/on_board/data/models/favorite_genre_model.dart';
 import 'package:door_stamp/presentation/screens/on_board/data/repository/favorite_genre_repository.dart';
 import 'package:door_stamp/presentation/screens/on_board/presentation/bloc/on_board_bloc.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

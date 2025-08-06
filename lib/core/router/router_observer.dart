@@ -1,4 +1,4 @@
-import 'package:door_stamp/util/logger.dart';
+import 'package:door_stamp/core/util/logger.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 

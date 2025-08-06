@@ -1,6 +1,6 @@
 import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

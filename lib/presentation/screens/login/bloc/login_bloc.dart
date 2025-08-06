@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:door_stamp/common/constant/svg_image_path.dart';
 import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/common/data/repository/authentication_repository.dart';
-import 'package:door_stamp/theme/color_style.dart';
-import 'package:door_stamp/util/logger.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/theme/color_style.dart';
+import 'package:door_stamp/core/util/logger.dart';
+import 'package:door_stamp/core/util/result.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';

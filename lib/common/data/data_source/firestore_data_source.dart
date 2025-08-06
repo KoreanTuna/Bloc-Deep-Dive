@@ -1,5 +1,5 @@
-import 'package:door_stamp/util/logger.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/logger.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 

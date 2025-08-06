@@ -2,7 +2,7 @@ import 'package:door_stamp/presentation/features/daily_box_office/data/data_sour
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_request_model.dart';
 import 'package:door_stamp/environment/api_config.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton

@@ -5,11 +5,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:door_stamp/core/util/result.dart' as _i4;
 import 'package:door_stamp/presentation/screens/movie_detail/data/models/movie_detail_model.dart'
     as _i5;
 import 'package:door_stamp/presentation/screens/movie_detail/data/repository/movie_detail_repository.dart'
     as _i2;
-import 'package:door_stamp/util/result.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 

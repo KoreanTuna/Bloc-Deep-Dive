@@ -1,8 +1,8 @@
 import 'package:door_stamp/common/constant/svg_image_path.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart';
 import 'package:door_stamp/presentation/widget/image_widget.dart';
-import 'package:door_stamp/theme/color_style.dart';
-import 'package:door_stamp/theme/text_style.dart';
+import 'package:door_stamp/core/theme/color_style.dart';
+import 'package:door_stamp/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 

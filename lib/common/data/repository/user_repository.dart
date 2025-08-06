@@ -5,7 +5,7 @@ import 'package:door_stamp/common/constant/firestore/firestore_path.dart';
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/models/user_model.dart';
 
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton

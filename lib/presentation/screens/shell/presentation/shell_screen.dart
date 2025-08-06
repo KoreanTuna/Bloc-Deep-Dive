@@ -1,7 +1,7 @@
 import 'package:door_stamp/presentation/screens/shell/presentation/bloc/bottom_nav_cubit.dart';
 import 'package:door_stamp/presentation/screens/shell/presentation/widget/bottom_nav_widget.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
-import 'package:door_stamp/router/router_path.dart';
+import 'package:door_stamp/core/router/router_path.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

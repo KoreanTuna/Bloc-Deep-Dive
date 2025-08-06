@@ -7,8 +7,8 @@ import 'package:door_stamp/presentation/screens/movie_detail/presentation/widget
 import 'package:door_stamp/presentation/screens/movie_detail/presentation/widget/movie_genre_info.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/presentation/widget/movie_people_info.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
-import 'package:door_stamp/theme/color_style.dart';
-import 'package:door_stamp/theme/text_style.dart';
+import 'package:door_stamp/core/theme/color_style.dart';
+import 'package:door_stamp/core/theme/text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
