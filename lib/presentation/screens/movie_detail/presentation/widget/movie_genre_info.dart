@@ -1,8 +1,8 @@
 import 'package:door_stamp/common/constant/png_image_path.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/data/models/movie_detail_model.dart';
 import 'package:door_stamp/presentation/widget/image_widget.dart';
-import 'package:door_stamp/theme/color_style.dart';
-import 'package:door_stamp/theme/text_style.dart';
+import 'package:door_stamp/core/theme/color_style.dart';
+import 'package:door_stamp/core/theme/text_style.dart';
 import 'package:flutter/cupertino.dart';
 
 class MovieGenreInfo extends StatelessWidget {

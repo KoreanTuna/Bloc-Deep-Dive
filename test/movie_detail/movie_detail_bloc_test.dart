@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/data/models/movie_detail_model.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/data/repository/movie_detail_repository.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/presentation/bloc/movie_detail_bloc.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/presentation/bloc/movie_detail_event.dart';
 import 'package:door_stamp/presentation/screens/movie_detail/presentation/bloc/movie_detail_state.dart';
-import 'package:door_stamp/util/result.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 

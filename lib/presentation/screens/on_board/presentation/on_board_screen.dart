@@ -4,9 +4,9 @@ import 'package:door_stamp/presentation/screens/on_board/data/repository/favorit
 import 'package:door_stamp/presentation/screens/on_board/presentation/bloc/on_board_bloc.dart';
 import 'package:door_stamp/presentation/screens/on_board/presentation/widget/genre_card.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
-import 'package:door_stamp/router/router_path.dart';
-import 'package:door_stamp/theme/color_style.dart';
-import 'package:door_stamp/theme/text_style.dart';
+import 'package:door_stamp/core/router/router_path.dart';
+import 'package:door_stamp/core/theme/color_style.dart';
+import 'package:door_stamp/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scroll_shadow/flutter_scroll_shadow.dart';

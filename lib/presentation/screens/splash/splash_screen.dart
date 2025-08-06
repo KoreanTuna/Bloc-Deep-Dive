@@ -5,8 +5,8 @@ import 'package:door_stamp/common/data/repository/authentication_repository.dart
 import 'package:door_stamp/common/extension/context_extension.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
 import 'package:door_stamp/presentation/widget/image_widget.dart';
-import 'package:door_stamp/router/router_path.dart';
-import 'package:door_stamp/util/logger.dart';
+import 'package:door_stamp/core/router/router_path.dart';
+import 'package:door_stamp/core/util/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,7 @@ class SplashScreen extends BaseScreen {
       context.read<UserBloc>().add(UserDataRequested(userId: userId));
     }
   }
+
   @override
   Widget buildScreen(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(

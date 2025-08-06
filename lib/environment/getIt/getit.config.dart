@@ -16,6 +16,11 @@ import 'package:door_stamp/common/data/repository/user_repository.dart'
     as _i570;
 import 'package:door_stamp/common/notifier/authentication_notifier.dart'
     as _i660;
+import 'package:door_stamp/core/router/router.dart' as _i1035;
+import 'package:door_stamp/core/router/router_observer.dart' as _i285;
+import 'package:door_stamp/core/util/dio.dart' as _i378;
+import 'package:door_stamp/core/util/local_storage/shared_pref_util.dart'
+    as _i168;
 import 'package:door_stamp/presentation/features/daily_box_office/data/data_source/box_office_data_source.dart'
     as _i1064;
 import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart'
@@ -24,10 +29,6 @@ import 'package:door_stamp/presentation/screens/movie_detail/data/data_source/mo
     as _i1036;
 import 'package:door_stamp/presentation/screens/movie_detail/data/repository/movie_detail_repository.dart'
     as _i1050;
-import 'package:door_stamp/router/router.dart' as _i498;
-import 'package:door_stamp/router/router_observer.dart' as _i676;
-import 'package:door_stamp/util/dio.dart' as _i681;
-import 'package:door_stamp/util/local_storage/shared_pref_util.dart' as _i851;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:go_router/go_router.dart' as _i583;
 import 'package:injectable/injectable.dart' as _i526;
@@ -41,21 +42,21 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPreferencesModule = _$SharedPreferencesModule();
-    final dioModule = _$DioModule();
     final goRouterModule = _$GoRouterModule();
+    final dioModule = _$DioModule();
     final boxOfficeDataSourceModule = _$BoxOfficeDataSourceModule();
     final movieDetailDataSourceModule = _$MovieDetailDataSourceModule();
     gh.singleton<_i660.AuthenticationNotifier>(
       () => _i660.AuthenticationNotifier(),
     );
+    gh.factory<_i285.RouterObserver>(() => _i285.RouterObserver());
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPreferencesModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i676.RouterObserver>(() => _i676.RouterObserver());
-    gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
     gh.singleton<_i622.FirestoreDataSource>(() => _i622.FirestoreDataSource());
     gh.singleton<_i583.GoRouter>(() => goRouterModule.router);
+    gh.singleton<_i361.Dio>(() => dioModule.createGitHubDio());
     gh.lazySingleton<_i1064.BoxOfficeDataSource>(
       () =>
           boxOfficeDataSourceModule.provideBoxOfficeDataSource(gh<_i361.Dio>()),
@@ -65,8 +66,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i361.Dio>(),
       ),
     );
-    gh.singleton<_i851.SharedPrefUtil>(
-      () => _i851.SharedPrefUtil(
+    gh.singleton<_i168.SharedPrefUtil>(
+      () => _i168.SharedPrefUtil(
         sharedPreferences: gh<_i460.SharedPreferences>(),
       ),
     );
@@ -83,11 +84,11 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$SharedPreferencesModule extends _i851.SharedPreferencesModule {}
+class _$SharedPreferencesModule extends _i168.SharedPreferencesModule {}
 
-class _$DioModule extends _i681.DioModule {}
+class _$GoRouterModule extends _i1035.GoRouterModule {}
 
-class _$GoRouterModule extends _i498.GoRouterModule {}
+class _$DioModule extends _i378.DioModule {}
 
 class _$BoxOfficeDataSourceModule extends _i1064.BoxOfficeDataSourceModule {}
 

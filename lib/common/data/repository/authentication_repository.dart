@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:door_stamp/common/data/repository/user_repository.dart';
-import 'package:door_stamp/util/logger.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/logger.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

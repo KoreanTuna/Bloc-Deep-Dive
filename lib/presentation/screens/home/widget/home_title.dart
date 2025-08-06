@@ -1,8 +1,8 @@
 import 'package:door_stamp/common/constant/svg_image_path.dart';
 import 'package:door_stamp/common/extension/date_time_extension.dart';
 import 'package:door_stamp/presentation/widget/image_widget.dart';
-import 'package:door_stamp/theme/color_style.dart';
-import 'package:door_stamp/theme/text_style.dart';
+import 'package:door_stamp/core/theme/color_style.dart';
+import 'package:door_stamp/core/theme/text_style.dart';
 import 'package:flutter/widgets.dart';
 
 class HomeTitle extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:door_stamp/common/bloc/authentication/authentication_bloc.dart';
 import 'package:door_stamp/common/bloc/user/user_bloc.dart';
 import 'package:door_stamp/common/data/models/user_model.dart';
 import 'package:door_stamp/presentation/widget/base/base_screen.dart';
-import 'package:door_stamp/theme/text_style.dart';
+import 'package:door_stamp/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

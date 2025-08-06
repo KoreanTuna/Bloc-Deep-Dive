@@ -2,8 +2,8 @@ import 'package:door_stamp/common/constant/firestore/firestore_path.dart';
 import 'package:door_stamp/common/data/data_source/firestore_data_source.dart';
 import 'package:door_stamp/common/data/repository/user_repository.dart';
 import 'package:door_stamp/presentation/screens/on_board/data/models/favorite_genre_model.dart';
-import 'package:door_stamp/util/logger.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/logger.dart';
+import 'package:door_stamp/core/util/result.dart';
 
 class FavoriteGenreRepository {
   FavoriteGenreRepository(

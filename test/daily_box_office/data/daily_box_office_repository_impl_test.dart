@@ -4,7 +4,7 @@ import 'package:door_stamp/presentation/features/daily_box_office/data/models/da
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_request_model.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/data/repository/box_office_repository.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/presentation/bloc/daily_box_office_bloc.dart';
-import 'package:door_stamp/util/result.dart';
+import 'package:door_stamp/core/util/result.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

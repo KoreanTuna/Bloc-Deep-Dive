@@ -1,6 +1,6 @@
 import 'package:door_stamp/environment/getIt/getit.dart';
 import 'package:door_stamp/firebase_options.dart';
-import 'package:door_stamp/util/bloc_observer.dart';
+import 'package:door_stamp/core/util/bloc_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
