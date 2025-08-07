@@ -12,15 +12,7 @@ import 'package:mocktail/mocktail.dart';
 class MockMovieSearchBloc extends MockBloc<MovieSearchEvent, MovieSearchState>
     implements MovieSearchBloc {}
 
-class FakeMovieSearchEvent extends Fake implements MovieSearchEvent {}
-class FakeMovieSearchState extends Fake implements MovieSearchState {}
-
 void main() {
-  setUpAll(() {
-    registerFallbackValue(FakeMovieSearchEvent());
-    registerFallbackValue(const MovieSearchState());
-  });
-
   testWidgets('renders movie list when search succeeds', (tester) async {
     final bloc = MockMovieSearchBloc();
     final movies = [

@@ -1,9 +1,18 @@
+import 'dart:typed_data';
+
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart';
 import 'package:door_stamp/presentation/features/daily_box_office/presentation/widget/daily_rank_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMessageHandler('flutter/assets', (_) async => ByteData(0));
+  });
+
   final movies = [
     DailyBoxOfficeMovieModel(
       movieCd: '1',

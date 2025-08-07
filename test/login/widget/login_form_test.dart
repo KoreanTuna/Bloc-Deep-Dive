@@ -1,26 +1,23 @@
+import 'dart:typed_data';
+
 import 'package:door_stamp/common/bloc/user/user_bloc.dart';
 import 'package:door_stamp/presentation/screens/login/bloc/login_bloc.dart';
 import 'package:door_stamp/presentation/screens/login/widget/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/services.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MockLoginBloc extends MockBloc<LoginEvent, LoginState> implements LoginBloc {}
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class FakeLoginEvent extends Fake implements LoginEvent {}
-class FakeUserEvent extends Fake implements UserEvent {}
-class FakeLoginState extends Fake implements LoginState {}
-class FakeUserState extends Fake implements UserState {}
-
 void main() {
-  setUpAll(() {
-    registerFallbackValue(FakeLoginEvent());
-    registerFallbackValue(FakeUserEvent());
-    registerFallbackValue(const LoginState());
-    registerFallbackValue(const UserInitial());
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMessageHandler('flutter/assets', (_) async => ByteData(0));
   });
 
   testWidgets('shows login buttons for all SSO types', (tester) async {

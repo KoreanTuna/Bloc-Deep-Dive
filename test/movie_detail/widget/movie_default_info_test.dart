@@ -19,7 +19,7 @@ void main() {
     directors: const [],
     actors: const [],
     showTypes: const [],
-    companys: const [
+    companys: [
       CompanyModel(
         companyCd: 'C1',
         companyNm: 'Company',
