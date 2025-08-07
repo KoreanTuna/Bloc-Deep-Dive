@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:door_stamp/presentation/features/daily_box_office/data/models/daily_box_office_model.dart';
@@ -9,8 +10,17 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMessageHandler('flutter/assets', (_) async => ByteData(0));
+    final messenger =
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+    messenger.setMockMessageHandler('flutter/assets', (message) async {
+      final key = utf8.decoder.convert(message!.buffer.asUint8List());
+      if (key.endsWith('.svg')) {
+        final bytes = Uint8List.fromList(
+            '<svg xmlns="http://www.w3.org/2000/svg"></svg>'.codeUnits);
+        return bytes.buffer.asByteData();
+      }
+      return ByteData(0);
+    });
   });
 
   final movies = [
