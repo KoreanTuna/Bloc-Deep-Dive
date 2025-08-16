@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:door_stamp/presentation/screens/search/data/models/movie_model.dart';
+import 'package:door_stamp/presentation/screens/search/data/repository/movie_search_repository.dart';
 import 'package:door_stamp/presentation/screens/search/presentation/bloc/movie_search_bloc.dart';
 import 'package:door_stamp/presentation/screens/search/presentation/bloc/movie_search_event.dart';
 import 'package:door_stamp/presentation/screens/search/presentation/bloc/movie_search_state.dart';
@@ -50,16 +51,19 @@ void main() {
       MaterialApp(
         home: BlocProvider<MovieSearchBloc>.value(
           value: bloc,
-          child: const SearchView(),
+          child: RepositoryProvider(
+            create: (_) => MovieSearchRepository(),
+            child: const SearchView(),
+          ),
         ),
       ),
     );
 
-    // await tester.pumpAndSettle();
+    await tester.pumpAndSettle();
 
-    // expect(find.byType(ListTile), findsNWidgets(movies.length));
-    // expect(find.text('A'), findsOneWidget);
-    // expect(find.text('B'), findsOneWidget);
+    expect(find.byType(ListTile), findsNWidgets(movies.length));
+    expect(find.text('A'), findsOneWidget);
+    expect(find.text('B'), findsOneWidget);
   });
 }
 
