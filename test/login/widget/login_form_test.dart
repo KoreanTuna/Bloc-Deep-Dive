@@ -11,7 +11,9 @@ import 'package:flutter/services.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MockLoginBloc extends MockBloc<LoginEvent, LoginState> implements LoginBloc {}
+class MockLoginBloc extends MockBloc<LoginEvent, LoginState>
+    implements LoginBloc {}
+
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 void main() {
@@ -23,7 +25,9 @@ void main() {
       final key = utf8.decoder.convert(message!.buffer.asUint8List());
       if (key.endsWith('.svg')) {
         final bytes = Uint8List.fromList(
-            '<svg xmlns="http://www.w3.org/2000/svg"></svg>'.codeUnits);
+          '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"></svg>'
+              .codeUnits,
+        );
         return bytes.buffer.asByteData();
       }
       return ByteData(0);

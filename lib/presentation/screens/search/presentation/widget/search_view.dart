@@ -6,7 +6,6 @@ import 'package:door_stamp/presentation/screens/search/presentation/bloc/movie_s
 import 'package:door_stamp/presentation/screens/search/presentation/bloc/movie_search_state.dart';
 import 'package:door_stamp/presentation/widget/textfield/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
