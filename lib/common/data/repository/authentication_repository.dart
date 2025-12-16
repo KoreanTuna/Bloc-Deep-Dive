@@ -82,8 +82,8 @@ class AuthenticationRepository {
     yield* _controller.stream;
   }
 
-  void logOut() {
-    FirebaseAuth.instance.signOut();
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 

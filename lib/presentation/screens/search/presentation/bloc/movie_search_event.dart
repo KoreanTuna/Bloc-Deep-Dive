@@ -31,12 +31,3 @@ final class MovieSearchClear extends MovieSearchEvent {
   @override
   List<Object?> get props => [];
 }
-
-final class MovieSearchError extends MovieSearchEvent {
-  const MovieSearchError(this.error);
-
-  final String error;
-
-  @override
-  List<Object?> get props => [error];
-}
