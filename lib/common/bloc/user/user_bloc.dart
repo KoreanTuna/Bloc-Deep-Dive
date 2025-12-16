@@ -33,7 +33,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(const UserState.error('사용자 정보가 없습니다.'));
         return;
       }
-      await _userRepository.setUserData(event.loginUserModel!);
+      final Result<void> setDateResult = await _userRepository.setUserData(
+        event.loginUserModel!,
+      );
+
+      if (setDateResult is Error) {
+        emit(UserState.error(setDateResult.error.toString()));
+        return;
+      }
     }
 
     /// 사용자 정보 fetching

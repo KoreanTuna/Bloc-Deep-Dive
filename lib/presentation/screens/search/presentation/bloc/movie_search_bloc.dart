@@ -32,17 +32,6 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
         );
       },
     );
-    on<MovieSearchError>(
-      (event, emit) {
-        emit(
-          state.copyWith(
-            status: MovieSearchStatus.failure,
-            movies: [],
-            errorMessage: event.error,
-          ),
-        );
-      },
-    );
   }
 
   final MovieSearchRepository _movieSearchRepository;
@@ -73,7 +62,6 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
             movies: [],
           ),
         );
-        add(MovieSearchError(error.toString()));
       },
     );
   }

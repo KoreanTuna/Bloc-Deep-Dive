@@ -52,10 +52,10 @@ class AuthenticationBloc
     );
   }
 
-  void _onLogoutPressed(
+  Future<void> _onLogoutPressed(
     AuthenticationLogoutPressed event,
     Emitter<AuthenticationState> emit,
-  ) {
-    _authenticationRepository.logOut();
+  ) async {
+    await _authenticationRepository.logOut();
   }
 }
